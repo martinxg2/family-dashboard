@@ -15,6 +15,8 @@
     --magellan-tint: #e8f0f8;
     --caraway: #8a4a2f;
     --caraway-tint: #f8eee8;
+    --pack: #3d6b3d;
+    --pack-tint: #e8f3e8;
     --today: #b8860b;
     --today-tint: #fff7df;
   }
@@ -26,16 +28,17 @@
     color: var(--ink);
     line-height: 1.55;
   }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
   header { margin-bottom: 28px; }
   h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -0.01em; }
   .subtitle { color: var(--muted); font-size: 14px; }
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
-  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 700px)  { .grid { grid-template-columns: 1fr; } }
   .card {
     background: var(--card);
     border: 1px solid var(--rule);
@@ -48,6 +51,7 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
+    flex-wrap: wrap;
   }
   .card .who {
     font-size: 13px;
@@ -55,7 +59,8 @@
     margin-bottom: 18px;
   }
   .card.magellan h2 { color: var(--magellan); }
-  .card.caraway h2 { color: var(--caraway); }
+  .card.caraway  h2 { color: var(--caraway); }
+  .card.pack     h2 { color: var(--pack); }
   .pill {
     display: inline-block;
     font-size: 11px;
@@ -66,7 +71,8 @@
     border-radius: 999px;
   }
   .magellan .pill { background: var(--magellan-tint); color: var(--magellan); }
-  .caraway .pill { background: var(--caraway-tint); color: var(--caraway); }
+  .caraway  .pill { background: var(--caraway-tint);  color: var(--caraway); }
+  .pack     .pill { background: var(--pack-tint);     color: var(--pack); }
   h3 {
     font-size: 14px;
     text-transform: uppercase;
@@ -104,27 +110,19 @@
     color: var(--ink);
   }
   .event .detail a { color: inherit; }
-  .specialist {
-    margin-bottom: 14px;
-  }
-  .specialist .label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--magellan);
-  }
-  .specialist .body {
-    font-size: 14px;
-    color: var(--ink);
-  }
+  .specialist { margin-bottom: 14px; }
+  .specialist .label { font-size: 13px; font-weight: 600; }
+  .magellan .specialist .label { color: var(--magellan); }
+  .specialist .body { font-size: 14px; }
   .note {
     margin-top: 18px;
     padding: 12px 14px;
-    background: var(--magellan-tint);
     border-radius: 8px;
     font-size: 13px;
-    color: var(--ink);
   }
-  .caraway .note { background: var(--caraway-tint); }
+  .magellan .note { background: var(--magellan-tint); }
+  .caraway  .note { background: var(--caraway-tint); }
+  .pack     .note { background: var(--pack-tint); }
   footer {
     margin-top: 32px;
     font-size: 12px;
@@ -138,26 +136,44 @@
 <div class="wrap">
   <header>
     <h1>Family School Dashboard</h1>
-    <div class="subtitle">Last refreshed Tuesday, April 28, 2026 &middot; Source: forwarded school emails</div>
+    <div class="subtitle">Last refreshed Wednesday, April 29, 2026 &middot; Source: forwarded school &amp; pack emails</div>
   </header>
 
   <div class="grid">
 
     <section class="card magellan">
-      <h2>Magellan <span class="pill">Aria &middot; Grade 2</span></h2>
-      <div class="who">2nd Grade Specialists update from Rubi Reyna &middot; Mon, Apr 27</div>
+      <h2>Magellan <span class="pill">Aria &middot; Grade 2 (2C)</span></h2>
+      <div class="who">Homeroom &amp; specialists updates via Toddle</div>
 
-      <h3>Upcoming &amp; To-Do</h3>
+      <h3>Action Items</h3>
       <div class="event">
         <div class="when">Ongoing</div>
         <div class="what">Save magazines for next year's art</div>
-        <div class="detail">Ms. Brenda is collecting recycled magazines &mdash; the class is using them as an art medium.</div>
+        <div class="detail">Ms. Brenda is collecting recycled magazines for use as a color medium.</div>
       </div>
 
-      <h3>This Week's Specialists</h3>
+      <h3>Class 2C &mdash; Ms. Acosta (Apr 24)</h3>
+      <div class="specialist">
+        <div class="label">Summative projects</div>
+        <div class="body">Students shared their finished projects with families this week. Ms. Acosta thanked parents who attended &mdash; and signed off with a year-end thank-you to the class.</div>
+      </div>
+      <div class="specialist">
+        <div class="label">Math</div>
+        <div class="body">Multiplying by 2, 3, 4, 5, and 10 using skip counting and repeated addition.</div>
+      </div>
+      <div class="specialist">
+        <div class="label">Spanish Language</div>
+        <div class="body">Reading and discussing biographies; building toward writing creative narratives (structure, ideas, expression).</div>
+      </div>
+      <div class="specialist">
+        <div class="label">Photos</div>
+        <div class="body"><a href="https://magellanschool.filecamp.com/s/o/GBEygSt1aOM1gc9Z" target="_blank" rel="noopener">Filecamp gallery</a> from the project share-out.</div>
+      </div>
+
+      <h3>Specialists &mdash; Ms. Reyna (Apr 27)</h3>
       <div class="specialist">
         <div class="label">Art</div>
-        <div class="body">Using magazines as an art medium &mdash; searching for color, even turning the magazine upside down to see colors before objects.</div>
+        <div class="body">Magazines as an art medium &mdash; searching for color, even turning the magazine upside down to see colors before objects.</div>
       </div>
       <div class="specialist">
         <div class="label">Music</div>
@@ -165,14 +181,14 @@
       </div>
       <div class="specialist">
         <div class="label">PE</div>
-        <div class="body">Reflecting on the Astronaut stations &mdash; strength, coordination, endurance, and how astronauts stay prepared.</div>
+        <div class="body">Reflecting on the Astronaut stations &mdash; strength, coordination, endurance.</div>
       </div>
       <div class="specialist">
         <div class="label">Library</div>
-        <div class="body">Reading about Katherine Johnson, the NASA mathematician whose orbital mechanics calculations supported early US spaceflights.</div>
+        <div class="body">Reading about Katherine Johnson, the NASA mathematician who supported early US spaceflights.</div>
       </div>
 
-      <div class="note">No action items beyond saving magazines &mdash; this week's email was a recap, not a deadline.</div>
+      <div class="note">No deadlines this week &mdash; both updates were recap-style.</div>
     </section>
 
     <section class="card caraway">
@@ -181,20 +197,14 @@
 
       <h3>Upcoming</h3>
 
-      <div class="event today">
-        <div class="when">Today &middot; Tue, Apr 28</div>
-        <div class="what">Bob Bullock Museum field trip</div>
-        <div class="detail">Leaving campus around 10:00 am, back by ~1:45 pm. Send a lunchbox and snack (unless you opted into the school sack lunch). Class eats early before leaving and again on return.</div>
-      </div>
-
       <div class="event">
-        <div class="when">Week of Apr 28</div>
+        <div class="when">Through this week</div>
         <div class="what">Scholastic Book Fair</div>
         <div class="detail">Info page: <a href="https://app.smore.com/n/jqeus" target="_blank" rel="noopener">app.smore.com/n/jqeus</a></div>
       </div>
 
-      <div class="event">
-        <div class="when">Thu, Apr 30 &middot; Evening</div>
+      <div class="event today">
+        <div class="when">Tomorrow &middot; Thu, Apr 30</div>
         <div class="what">Book Fair Late Night (open until 6:30 pm)</div>
         <div class="detail">TAG Showcase, art displays, and more around the school.</div>
       </div>
@@ -203,7 +213,6 @@
         <div class="when">Fri, May 8</div>
         <div class="what">Maturation Presentation &mdash; opt-in required</div>
         <div class="detail">
-          Sign the permission form to participate.
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English form</a>
           &middot;
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a>
@@ -222,25 +231,65 @@
       <div class="event">
         <div class="when">Thu, May 21 &middot; 10:45 am &ndash; 12:00 pm</div>
         <div class="what">Last Day of School Party</div>
-        <div class="detail">Picnic at the playground tables. Teachers provide pizza; lunchboxes/cafeteria still fine. HRP team is coordinating extras.
+        <div class="detail">Picnic at the playground tables. Teachers provide pizza; lunchboxes/cafeteria still fine.
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">Pre-print badge</a>.
         </div>
       </div>
 
       <h3>Recap</h3>
       <div class="event">
-        <div class="when">Last week</div>
+        <div class="when">Tue, Apr 28</div>
+        <div class="what">Bob Bullock Museum field trip &mdash; done</div>
+        <div class="detail">Class returned by ~1:45 pm.</div>
+      </div>
+      <div class="event">
+        <div class="when">Earlier in April</div>
         <div class="what">Field Day &mdash; Gorilla Steve survived (briefly)</div>
-        <div class="detail">Pinata stuffed with treats; check backpacks for any wet clothes from the day before they ferment.</div>
+        <div class="detail">Pinata stuffed with treats; double-check backpacks for any wet clothes.</div>
       </div>
 
-      <div class="note">Today's the field trip &mdash; lunchbox + snack is the live action item.</div>
+      <div class="note">Late-night Book Fair tomorrow is the next live item.</div>
+    </section>
+
+    <section class="card pack">
+      <h2>Pack 162 <span class="pill">Cub Scouts</span></h2>
+      <div class="who">EBlast Tue, Apr 28 &middot; meets at Caraway Elementary Cafeteria</div>
+
+      <h3>Upcoming</h3>
+
+      <div class="event today">
+        <div class="when">Tonight &middot; Wed, Apr 29 &middot; 8:00 pm</div>
+        <div class="what">Pack Committee Meeting</div>
+        <div class="detail">7312 Danwood Dr, Austin, TX 78759. Open to any parents who want to get more involved or just observe.
+          <a href="http://www.austinpack162.com/node/7306" target="_blank" rel="noopener">Details</a>.
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="when">Thu, May 7 &middot; 6:45 pm</div>
+        <div class="what">Pack Meeting</div>
+        <div class="detail">Caraway Elementary Cafeteria. <a href="http://www.austinpack162.com/node/7297" target="_blank" rel="noopener">Details</a>.</div>
+      </div>
+
+      <div class="event">
+        <div class="when">Fri, May 15 &middot; 3:00 pm</div>
+        <div class="what">Pinewood Derby &mdash; technical check-in</div>
+        <div class="detail"><a href="http://www.austinpack162.com/node/7304" target="_blank" rel="noopener">Details</a>.</div>
+      </div>
+
+      <div class="event">
+        <div class="when">Sat, May 16 &middot; 10:00 am</div>
+        <div class="what">Pinewood Derby &mdash; Race Day</div>
+        <div class="detail">Caraway Elementary Cafeteria. <a href="http://www.austinpack162.com/node/7303" target="_blank" rel="noopener">Details</a>.</div>
+      </div>
+
+      <div class="note">Tonight's committee meeting is optional &mdash; only go if you want to be in the planning loop.</div>
     </section>
 
   </div>
 
   <footer>
-    Built from two forwarded school emails. Re-run the refresh whenever new updates arrive in the inbox.
+    Built from forwarded emails (Magellan / Caraway / Pack 162). Re-run the refresh whenever new updates arrive.
   </footer>
 </div>
 </body>
