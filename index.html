@@ -3,294 +3,531 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Family School Dashboard</title>
+<title>Family Dashboard</title>
 <style>
   :root {
-    --bg: #f7f5f0;
+    --bg: #f4f1ea;
+    --ink: #1a2332;
+    --ink-soft: #4a5568;
+    --muted: #8a92a0;
     --card: #ffffff;
-    --ink: #1f2933;
-    --muted: #5b6470;
-    --rule: #e3e0d8;
-    --magellan: #2f5d8a;
-    --magellan-tint: #e8f0f8;
-    --caraway: #8a4a2f;
-    --caraway-tint: #f8eee8;
-    --pack: #3d6b3d;
-    --pack-tint: #e8f3e8;
+    --rule: #e6e2d8;
+
+    /* Source colors */
+    --magellan: #2557a7;
+    --magellan-soft: #dde6f4;
+    --caraway: #c2410c;
+    --caraway-soft: #fde4d3;
+    --pack: #2f7a3a;
+    --pack-soft: #d9ecde;
+
+    /* Action / today */
+    --alert: #b91c1c;
+    --alert-soft: #fde0e0;
     --today: #b8860b;
-    --today-tint: #fff7df;
+    --today-soft: #fff4d0;
   }
+
   * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
   body {
-    margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.55;
+    line-height: 1.45;
   }
-  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
-  header { margin-bottom: 28px; }
-  h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -0.01em; }
-  .subtitle { color: var(--muted); font-size: 14px; }
-  .grid {
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 24px 64px; }
+
+  /* ============ Header ============ */
+  header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  h1 {
+    margin: 0;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+  }
+  .legend-swatch {
+    width: 12px; height: 12px; border-radius: 3px;
+  }
+  .swatch-magellan { background: var(--magellan); }
+  .swatch-caraway  { background: var(--caraway); }
+  .swatch-pack     { background: var(--pack); }
+
+  /* ============ Section labels ============ */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ============ Action bar ============ */
+  .actions {
+    margin-bottom: 36px;
+  }
+  .actions-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 14px;
   }
-  @media (max-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 700px)  { .grid { grid-template-columns: 1fr; } }
-  .card {
+  @media (max-width: 880px) { .actions-grid { grid-template-columns: 1fr; } }
+  .action-card {
+    display: block;
+    text-decoration: none;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 6px solid var(--alert);
+    border-radius: 10px;
+    padding: 16px 18px;
+    color: inherit;
+    transition: transform .12s ease;
+  }
+  .action-card:hover { transform: translateY(-2px); }
+  .action-countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--alert-soft);
+    color: var(--alert);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .action-countdown.soft {
+    background: #f1ede1;
+    color: var(--ink-soft);
+  }
+  .action-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .action-cta {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .action-cta a { color: var(--magellan); text-decoration: none; font-weight: 600; }
+  .action-cta a:hover { text-decoration: underline; }
+
+  /* ============ Calendar grid ============ */
+  .schedule { margin-bottom: 36px; }
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 1024px) { .day-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px)  { .day-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .day-grid { grid-template-columns: 1fr; } }
+
+  .day-card {
     background: var(--card);
     border: 1px solid var(--rule);
     border-radius: 12px;
-    padding: 22px 24px;
+    padding: 14px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 170px;
   }
-  .card h2 {
-    margin: 0 0 2px;
-    font-size: 20px;
+  .day-card.today {
+    background: var(--today-soft);
+    border-color: var(--today);
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.15);
+  }
+  .day-head {
     display: flex;
     align-items: baseline;
-    gap: 10px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 8px;
   }
-  .card .who {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 18px;
+  .day-num {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
-  .card.magellan h2 { color: var(--magellan); }
-  .card.caraway  h2 { color: var(--caraway); }
-  .card.pack     h2 { color: var(--pack); }
-  .pill {
-    display: inline-block;
+  .day-card.today .day-num { color: var(--today); }
+  .day-month {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 2px 8px;
-    border-radius: 999px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
   }
-  .magellan .pill { background: var(--magellan-tint); color: var(--magellan); }
-  .caraway  .pill { background: var(--caraway-tint);  color: var(--caraway); }
-  .pack     .pill { background: var(--pack-tint);     color: var(--pack); }
-  h3 {
-    font-size: 14px;
+  .day-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--muted);
-    margin: 22px 0 10px;
-    font-weight: 600;
   }
+  .day-card.today .day-name { color: var(--today); }
+
   .event {
-    border-left: 3px solid var(--rule);
-    padding: 6px 0 6px 14px;
-    margin-bottom: 14px;
-  }
-  .event.today {
-    border-left-color: var(--today);
-    background: var(--today-tint);
-    border-radius: 0 6px 6px 0;
-    padding-right: 12px;
-  }
-  .event .when {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .event.today .when { color: var(--today); }
-  .event .what {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 2px 0 4px;
-  }
-  .event .detail {
-    font-size: 14px;
-    color: var(--ink);
-  }
-  .event .detail a { color: inherit; }
-  .specialist { margin-bottom: 14px; }
-  .specialist .label { font-size: 13px; font-weight: 600; }
-  .magellan .specialist .label { color: var(--magellan); }
-  .specialist .body { font-size: 14px; }
-  .note {
-    margin-top: 18px;
-    padding: 12px 14px;
     border-radius: 8px;
-    font-size: 13px;
+    padding: 10px 12px;
+    border-left: 4px solid var(--rule);
+    background: #fafaf6;
+    position: relative;
   }
-  .magellan .note { background: var(--magellan-tint); }
-  .caraway  .note { background: var(--caraway-tint); }
-  .pack     .note { background: var(--pack-tint); }
+  .event.magellan { border-left-color: var(--magellan); background: var(--magellan-soft); }
+  .event.caraway  { border-left-color: var(--caraway);  background: var(--caraway-soft); }
+  .event.pack     { border-left-color: var(--pack);     background: var(--pack-soft); }
+  .event-time {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 2px;
+  }
+  .event-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .event-detail {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .event-flag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--alert);
+    color: white;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .event-flag.optional { background: var(--muted); }
+
+  /* ============ Info section ============ */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 980px) { .info-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .info-card.magellan { border-top-color: var(--magellan); }
+  .info-card.caraway  { border-top-color: var(--caraway); }
+  .info-card.pack     { border-top-color: var(--pack); }
+  .info-card h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .info-card .info-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .topic {
+    margin-bottom: 10px;
+  }
+  .topic-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  .magellan .topic-label { background: var(--magellan-soft); color: var(--magellan); }
+  .caraway  .topic-label { background: var(--caraway-soft);  color: var(--caraway); }
+  .pack     .topic-label { background: var(--pack-soft);     color: var(--pack); }
+  .topic-body {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .topic-body a { color: var(--magellan); }
+
   footer {
     margin-top: 32px;
-    font-size: 12px;
-    color: var(--muted);
     text-align: center;
+    color: var(--muted);
+    font-size: 12px;
   }
-  footer a { color: inherit; }
 </style>
 </head>
 <body>
 <div class="wrap">
+
   <header>
-    <h1>Family School Dashboard</h1>
-    <div class="subtitle">Last refreshed Wednesday, April 29, 2026 &middot; Source: forwarded school &amp; pack emails</div>
+    <div>
+      <h1>Family Dashboard</h1>
+      <div class="meta">Wednesday, April 29, 2026 &middot; refreshed today</div>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-swatch swatch-magellan"></span>Magellan</span>
+      <span class="legend-item"><span class="legend-swatch swatch-caraway"></span>Caraway</span>
+      <span class="legend-item"><span class="legend-swatch swatch-pack"></span>Pack 162</span>
+    </div>
   </header>
 
-  <div class="grid">
+  <!-- ========= ACTIONS ========= -->
+  <section class="actions">
+    <div class="section-label">Needs your attention</div>
+    <div class="actions-grid">
 
-    <section class="card magellan">
-      <h2>Magellan <span class="pill">Aria &middot; Grade 2 (2C)</span></h2>
-      <div class="who">Homeroom &amp; specialists updates via Toddle</div>
+      <a class="action-card" href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">
+        <span class="action-countdown">Due in 9 days &middot; Fri May 8</span>
+        <div class="action-title">Maturation presentation opt-in</div>
+        <div class="action-cta">Sign permission form &mdash; <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English</a> &middot; <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a></div>
+      </a>
 
-      <h3>Action Items</h3>
-      <div class="event">
-        <div class="when">Ongoing</div>
-        <div class="what">Save magazines for next year's art</div>
-        <div class="detail">Ms. Brenda is collecting recycled magazines for use as a color medium.</div>
-      </div>
+      <a class="action-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
+        <span class="action-countdown soft">Before Thu May 14</span>
+        <div class="action-title">Pre-print Texas Play badge</div>
+        <div class="action-cta">4th Grade Texas Play &mdash; visitor sign-up form</div>
+      </a>
 
-      <h3>Class 2C &mdash; Ms. Acosta (Apr 24)</h3>
-      <div class="specialist">
-        <div class="label">Summative projects</div>
-        <div class="body">Students shared their finished projects with families this week. Ms. Acosta thanked parents who attended &mdash; and signed off with a year-end thank-you to the class.</div>
-      </div>
-      <div class="specialist">
-        <div class="label">Math</div>
-        <div class="body">Multiplying by 2, 3, 4, 5, and 10 using skip counting and repeated addition.</div>
-      </div>
-      <div class="specialist">
-        <div class="label">Spanish Language</div>
-        <div class="body">Reading and discussing biographies; building toward writing creative narratives (structure, ideas, expression).</div>
-      </div>
-      <div class="specialist">
-        <div class="label">Photos</div>
-        <div class="body"><a href="https://magellanschool.filecamp.com/s/o/GBEygSt1aOM1gc9Z" target="_blank" rel="noopener">Filecamp gallery</a> from the project share-out.</div>
-      </div>
+      <a class="action-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
+        <span class="action-countdown soft">Before Thu May 21</span>
+        <div class="action-title">Pre-print Last Day Party badge</div>
+        <div class="action-cta">End-of-year picnic visitor sign-up</div>
+      </a>
 
-      <h3>Specialists &mdash; Ms. Reyna (Apr 27)</h3>
-      <div class="specialist">
-        <div class="label">Art</div>
-        <div class="body">Magazines as an art medium &mdash; searching for color, even turning the magazine upside down to see colors before objects.</div>
-      </div>
-      <div class="specialist">
-        <div class="label">Music</div>
-        <div class="body">Beginning their first band repertoire while continuing core work in singing and movement.</div>
-      </div>
-      <div class="specialist">
-        <div class="label">PE</div>
-        <div class="body">Reflecting on the Astronaut stations &mdash; strength, coordination, endurance.</div>
-      </div>
-      <div class="specialist">
-        <div class="label">Library</div>
-        <div class="body">Reading about Katherine Johnson, the NASA mathematician who supported early US spaceflights.</div>
-      </div>
+    </div>
+  </section>
 
-      <div class="note">No deadlines this week &mdash; both updates were recap-style.</div>
-    </section>
+  <!-- ========= SCHEDULE ========= -->
+  <section class="schedule">
+    <div class="section-label">What's on the calendar</div>
+    <div class="day-grid">
 
-    <section class="card caraway">
-      <h2>Caraway <span class="pill">Grade 4 &middot; Ms. Lozano</span></h2>
-      <div class="who">4th-grade update from Sarah Lozano, Kathy Caraway Elementary &middot; Sun, Apr 26</div>
-
-      <h3>Upcoming</h3>
-
-      <div class="event">
-        <div class="when">Through this week</div>
-        <div class="what">Scholastic Book Fair</div>
-        <div class="detail">Info page: <a href="https://app.smore.com/n/jqeus" target="_blank" rel="noopener">app.smore.com/n/jqeus</a></div>
-      </div>
-
-      <div class="event today">
-        <div class="when">Tomorrow &middot; Thu, Apr 30</div>
-        <div class="what">Book Fair Late Night (open until 6:30 pm)</div>
-        <div class="detail">TAG Showcase, art displays, and more around the school.</div>
-      </div>
-
-      <div class="event">
-        <div class="when">Fri, May 8</div>
-        <div class="what">Maturation Presentation &mdash; opt-in required</div>
-        <div class="detail">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English form</a>
-          &middot;
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a>
+      <div class="day-card today">
+        <div class="day-head">
+          <div>
+            <div class="day-num">29</div>
+            <div class="day-month">Apr &middot; Today</div>
+          </div>
+          <div class="day-name">Wed</div>
+        </div>
+        <div class="event pack">
+          <div class="event-time">8:00 PM <span class="event-flag optional">Optional</span></div>
+          <div class="event-title">Pack Committee Meeting</div>
+          <div class="event-detail">7312 Danwood Dr &middot; only if you want to be in the planning loop</div>
         </div>
       </div>
 
-      <div class="event">
-        <div class="when">Thu, May 14 &middot; 7:45 am</div>
-        <div class="what">4th Grade Texas Play</div>
-        <div class="detail">
-          Pre-print your visitor badge:
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">visitor sign-up</a>.
+      <div class="day-card">
+        <div class="day-head">
+          <div>
+            <div class="day-num">30</div>
+            <div class="day-month">Apr</div>
+          </div>
+          <div class="day-name">Thu</div>
+        </div>
+        <div class="event caraway">
+          <div class="event-time">Until 6:30 PM</div>
+          <div class="event-title">Book Fair Late Night</div>
+          <div class="event-detail">+ TAG Showcase &amp; art displays</div>
         </div>
       </div>
 
-      <div class="event">
-        <div class="when">Thu, May 21 &middot; 10:45 am &ndash; 12:00 pm</div>
-        <div class="what">Last Day of School Party</div>
-        <div class="detail">Picnic at the playground tables. Teachers provide pizza; lunchboxes/cafeteria still fine.
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">Pre-print badge</a>.
+      <div class="day-card">
+        <div class="day-head">
+          <div>
+            <div class="day-num">7</div>
+            <div class="day-month">May</div>
+          </div>
+          <div class="day-name">Thu</div>
+        </div>
+        <div class="event pack">
+          <div class="event-time">6:45 PM</div>
+          <div class="event-title">Pack Meeting</div>
+          <div class="event-detail">Caraway Elementary cafeteria</div>
         </div>
       </div>
 
-      <h3>Recap</h3>
-      <div class="event">
-        <div class="when">Tue, Apr 28</div>
-        <div class="what">Bob Bullock Museum field trip &mdash; done</div>
-        <div class="detail">Class returned by ~1:45 pm.</div>
-      </div>
-      <div class="event">
-        <div class="when">Earlier in April</div>
-        <div class="what">Field Day &mdash; Gorilla Steve survived (briefly)</div>
-        <div class="detail">Pinata stuffed with treats; double-check backpacks for any wet clothes.</div>
-      </div>
-
-      <div class="note">Late-night Book Fair tomorrow is the next live item.</div>
-    </section>
-
-    <section class="card pack">
-      <h2>Pack 162 <span class="pill">Cub Scouts</span></h2>
-      <div class="who">EBlast Tue, Apr 28 &middot; meets at Caraway Elementary Cafeteria</div>
-
-      <h3>Upcoming</h3>
-
-      <div class="event today">
-        <div class="when">Tonight &middot; Wed, Apr 29 &middot; 8:00 pm</div>
-        <div class="what">Pack Committee Meeting</div>
-        <div class="detail">7312 Danwood Dr, Austin, TX 78759. Open to any parents who want to get more involved or just observe.
-          <a href="http://www.austinpack162.com/node/7306" target="_blank" rel="noopener">Details</a>.
+      <div class="day-card">
+        <div class="day-head">
+          <div>
+            <div class="day-num">8</div>
+            <div class="day-month">May</div>
+          </div>
+          <div class="day-name">Fri</div>
+        </div>
+        <div class="event caraway">
+          <div class="event-time">School day <span class="event-flag">Action</span></div>
+          <div class="event-title">Maturation Presentation</div>
+          <div class="event-detail">Opt-in &mdash; sign form before today</div>
         </div>
       </div>
 
-      <div class="event">
-        <div class="when">Thu, May 7 &middot; 6:45 pm</div>
-        <div class="what">Pack Meeting</div>
-        <div class="detail">Caraway Elementary Cafeteria. <a href="http://www.austinpack162.com/node/7297" target="_blank" rel="noopener">Details</a>.</div>
+      <div class="day-card">
+        <div class="day-head">
+          <div>
+            <div class="day-num">14</div>
+            <div class="day-month">May</div>
+          </div>
+          <div class="day-name">Thu</div>
+        </div>
+        <div class="event caraway">
+          <div class="event-time">7:45 AM <span class="event-flag">Action</span></div>
+          <div class="event-title">4th Grade Texas Play</div>
+          <div class="event-detail">Pre-print visitor badge to skip the desk</div>
+        </div>
       </div>
 
-      <div class="event">
-        <div class="when">Fri, May 15 &middot; 3:00 pm</div>
-        <div class="what">Pinewood Derby &mdash; technical check-in</div>
-        <div class="detail"><a href="http://www.austinpack162.com/node/7304" target="_blank" rel="noopener">Details</a>.</div>
+      <div class="day-card">
+        <div class="day-head">
+          <div>
+            <div class="day-num">15</div>
+            <div class="day-month">May</div>
+          </div>
+          <div class="day-name">Fri</div>
+        </div>
+        <div class="event pack">
+          <div class="event-time">3:00 PM</div>
+          <div class="event-title">Pinewood Derby check-in</div>
+          <div class="event-detail">Technical inspection before race day</div>
+        </div>
       </div>
 
-      <div class="event">
-        <div class="when">Sat, May 16 &middot; 10:00 am</div>
-        <div class="what">Pinewood Derby &mdash; Race Day</div>
-        <div class="detail">Caraway Elementary Cafeteria. <a href="http://www.austinpack162.com/node/7303" target="_blank" rel="noopener">Details</a>.</div>
+      <div class="day-card">
+        <div class="day-head">
+          <div>
+            <div class="day-num">16</div>
+            <div class="day-month">May</div>
+          </div>
+          <div class="day-name">Sat</div>
+        </div>
+        <div class="event pack">
+          <div class="event-time">10:00 AM</div>
+          <div class="event-title">Pinewood Derby Race Day</div>
+          <div class="event-detail">Caraway Elementary cafeteria</div>
+        </div>
       </div>
 
-      <div class="note">Tonight's committee meeting is optional &mdash; only go if you want to be in the planning loop.</div>
-    </section>
+      <div class="day-card">
+        <div class="day-head">
+          <div>
+            <div class="day-num">21</div>
+            <div class="day-month">May</div>
+          </div>
+          <div class="day-name">Thu</div>
+        </div>
+        <div class="event caraway">
+          <div class="event-time">10:45 AM &ndash; 12:00 PM <span class="event-flag">Action</span></div>
+          <div class="event-title">Last Day Picnic Party</div>
+          <div class="event-detail">Playground tables &middot; pre-print badge</div>
+        </div>
+      </div>
 
-  </div>
+    </div>
+  </section>
+
+  <!-- ========= INFO / CONTEXT ========= -->
+  <section class="info">
+    <div class="section-label">Class notes &amp; standing items</div>
+    <div class="info-grid">
+
+      <div class="info-card magellan">
+        <h3>Magellan &mdash; Aria, Grade 2 (2C)</h3>
+        <div class="info-sub">Latest learning across homeroom &amp; specialists</div>
+        <div class="topic">
+          <span class="topic-label">Math</span>
+          <div class="topic-body">Multiplying by 2, 3, 4, 5, 10 with skip counting and repeated addition.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Spanish</span>
+          <div class="topic-body">Reading biographies; building toward creative narrative writing.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Specialists</span>
+          <div class="topic-body">Art using magazines for color &middot; first band repertoire in Music &middot; Astronaut PE stations &middot; Library on Katherine Johnson.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Photos</span>
+          <div class="topic-body"><a href="https://magellanschool.filecamp.com/s/o/GBEygSt1aOM1gc9Z" target="_blank" rel="noopener">Project share-out gallery</a></div>
+        </div>
+      </div>
+
+      <div class="info-card caraway">
+        <h3>Caraway &mdash; Grade 4, Ms. Lozano</h3>
+        <div class="info-sub">Recap &amp; references</div>
+        <div class="topic">
+          <span class="topic-label">Book Fair</span>
+          <div class="topic-body">Open all week. <a href="https://app.smore.com/n/jqeus" target="_blank" rel="noopener">Info page</a>.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Apr 28 recap</span>
+          <div class="topic-body">Bob Bullock Museum field trip &mdash; class returned by ~1:45 PM.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Earlier April</span>
+          <div class="topic-body">Field Day &mdash; Gorilla Steve pinata, watch backpacks for stowaway wet clothes.</div>
+        </div>
+      </div>
+
+      <div class="info-card magellan">
+        <h3>Standing ask</h3>
+        <div class="info-sub">No deadline</div>
+        <div class="topic">
+          <span class="topic-label">Magellan Art</span>
+          <div class="topic-body">Save magazines for next year &mdash; Ms. Brenda is collecting them as a color medium.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <footer>
-    Built from forwarded emails (Magellan / Caraway / Pack 162). Re-run the refresh whenever new updates arrive.
+    Built from forwarded emails &middot; Magellan, Caraway, Pack 162
   </footer>
+
 </div>
 </body>
 </html>
