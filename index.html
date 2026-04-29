@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family School Dashboard</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --ink: #1f2933;
+    --muted: #5b6470;
+    --rule: #e3e0d8;
+    --magellan: #2f5d8a;
+    --magellan-tint: #e8f0f8;
+    --caraway: #8a4a2f;
+    --caraway-tint: #f8eee8;
+    --today: #b8860b;
+    --today-tint: #fff7df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+  header { margin-bottom: 28px; }
+  h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -0.01em; }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .card h2 {
+    margin: 0 0 2px;
+    font-size: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .card .who {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .card.magellan h2 { color: var(--magellan); }
+  .card.caraway h2 { color: var(--caraway); }
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .magellan .pill { background: var(--magellan-tint); color: var(--magellan); }
+  .caraway .pill { background: var(--caraway-tint); color: var(--caraway); }
+  h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 22px 0 10px;
+    font-weight: 600;
+  }
+  .event {
+    border-left: 3px solid var(--rule);
+    padding: 6px 0 6px 14px;
+    margin-bottom: 14px;
+  }
+  .event.today {
+    border-left-color: var(--today);
+    background: var(--today-tint);
+    border-radius: 0 6px 6px 0;
+    padding-right: 12px;
+  }
+  .event .when {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .event.today .when { color: var(--today); }
+  .event .what {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 2px 0 4px;
+  }
+  .event .detail {
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .event .detail a { color: inherit; }
+  .specialist {
+    margin-bottom: 14px;
+  }
+  .specialist .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--magellan);
+  }
+  .specialist .body {
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .note {
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: var(--magellan-tint);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .caraway .note { background: var(--caraway-tint); }
+  footer {
+    margin-top: 32px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Family School Dashboard</h1>
+    <div class="subtitle">Last refreshed Tuesday, April 28, 2026 &middot; Source: forwarded school emails</div>
+  </header>
+
+  <div class="grid">
+
+    <section class="card magellan">
+      <h2>Magellan <span class="pill">Aria &middot; Grade 2</span></h2>
+      <div class="who">2nd Grade Specialists update from Rubi Reyna &middot; Mon, Apr 27</div>
+
+      <h3>Upcoming &amp; To-Do</h3>
+      <div class="event">
+        <div class="when">Ongoing</div>
+        <div class="what">Save magazines for next year's art</div>
+        <div class="detail">Ms. Brenda is collecting recycled magazines &mdash; the class is using them as an art medium.</div>
+      </div>
+
+      <h3>This Week's Specialists</h3>
+      <div class="specialist">
+        <div class="label">Art</div>
+        <div class="body">Using magazines as an art medium &mdash; searching for color, even turning the magazine upside down to see colors before objects.</div>
+      </div>
+      <div class="specialist">
+        <div class="label">Music</div>
+        <div class="body">Beginning their first band repertoire while continuing core work in singing and movement.</div>
+      </div>
+      <div class="specialist">
+        <div class="label">PE</div>
+        <div class="body">Reflecting on the Astronaut stations &mdash; strength, coordination, endurance, and how astronauts stay prepared.</div>
+      </div>
+      <div class="specialist">
+        <div class="label">Library</div>
+        <div class="body">Reading about Katherine Johnson, the NASA mathematician whose orbital mechanics calculations supported early US spaceflights.</div>
+      </div>
+
+      <div class="note">No action items beyond saving magazines &mdash; this week's email was a recap, not a deadline.</div>
+    </section>
+
+    <section class="card caraway">
+      <h2>Caraway <span class="pill">Grade 4 &middot; Ms. Lozano</span></h2>
+      <div class="who">4th-grade update from Sarah Lozano, Kathy Caraway Elementary &middot; Sun, Apr 26</div>
+
+      <h3>Upcoming</h3>
+
+      <div class="event today">
+        <div class="when">Today &middot; Tue, Apr 28</div>
+        <div class="what">Bob Bullock Museum field trip</div>
+        <div class="detail">Leaving campus around 10:00 am, back by ~1:45 pm. Send a lunchbox and snack (unless you opted into the school sack lunch). Class eats early before leaving and again on return.</div>
+      </div>
+
+      <div class="event">
+        <div class="when">Week of Apr 28</div>
+        <div class="what">Scholastic Book Fair</div>
+        <div class="detail">Info page: <a href="https://app.smore.com/n/jqeus" target="_blank" rel="noopener">app.smore.com/n/jqeus</a></div>
+      </div>
+
+      <div class="event">
+        <div class="when">Thu, Apr 30 &middot; Evening</div>
+        <div class="what">Book Fair Late Night (open until 6:30 pm)</div>
+        <div class="detail">TAG Showcase, art displays, and more around the school.</div>
+      </div>
+
+      <div class="event">
+        <div class="when">Fri, May 8</div>
+        <div class="what">Maturation Presentation &mdash; opt-in required</div>
+        <div class="detail">
+          Sign the permission form to participate.
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English form</a>
+          &middot;
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="when">Thu, May 14 &middot; 7:45 am</div>
+        <div class="what">4th Grade Texas Play</div>
+        <div class="detail">
+          Pre-print your visitor badge:
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">visitor sign-up</a>.
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="when">Thu, May 21 &middot; 10:45 am &ndash; 12:00 pm</div>
+        <div class="what">Last Day of School Party</div>
+        <div class="detail">Picnic at the playground tables. Teachers provide pizza; lunchboxes/cafeteria still fine. HRP team is coordinating extras.
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">Pre-print badge</a>.
+        </div>
+      </div>
+
+      <h3>Recap</h3>
+      <div class="event">
+        <div class="when">Last week</div>
+        <div class="what">Field Day &mdash; Gorilla Steve survived (briefly)</div>
+        <div class="detail">Pinata stuffed with treats; check backpacks for any wet clothes from the day before they ferment.</div>
+      </div>
+
+      <div class="note">Today's the field trip &mdash; lunchbox + snack is the live action item.</div>
+    </section>
+
+  </div>
+
+  <footer>
+    Built from two forwarded school emails. Re-run the refresh whenever new updates arrive in the inbox.
+  </footer>
+</div>
+</body>
+</html>
