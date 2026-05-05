@@ -38,7 +38,6 @@
   }
   .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 24px 64px; }
 
-  /* ============ Header ============ */
   header {
     display: flex;
     align-items: flex-end;
@@ -47,22 +46,13 @@
     margin-bottom: 28px;
     flex-wrap: wrap;
   }
-  h1 {
-    margin: 0;
-    font-size: 32px;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-  }
+  h1 { margin: 0; font-size: 32px; letter-spacing: -0.02em; font-weight: 700; }
   .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
   .legend { display: flex; gap: 14px; flex-wrap: wrap; }
   .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
     color: var(--ink-soft);
   }
   .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
@@ -70,24 +60,44 @@
   .swatch-caraway  { background: var(--caraway); }
   .swatch-pack     { background: var(--pack); }
 
-  /* ============ Section labels ============ */
   .section-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 14px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 14px;
   }
   .section-label::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
+    content: ""; flex: 1; height: 1px; background: var(--rule);
   }
+
+  /* ============ Completion button ============ */
+  .complete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--muted);
+    background: rgba(255,255,255,0.6);
+    color: transparent;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background .12s ease, border-color .12s ease, color .12s ease, transform .12s ease;
+    z-index: 2;
+  }
+  .complete-btn:hover {
+    background: var(--pack);
+    border-color: var(--pack);
+    color: white;
+    transform: scale(1.08);
+  }
+  .complete-btn::before { content: "\2713"; }
 
   /* ============ Action bar ============ */
   .actions { margin-bottom: 36px; }
@@ -99,60 +109,50 @@
   @media (max-width: 1100px) { .actions-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px)  { .actions-grid { grid-template-columns: 1fr; } }
   .action-card {
-    display: block;
-    text-decoration: none;
+    position: relative;
     background: var(--card);
     border: 1px solid var(--rule);
     border-left: 6px solid var(--alert);
     border-radius: 10px;
     padding: 16px 18px;
-    color: inherit;
     transition: transform .12s ease;
   }
   .action-card.caraway { border-left-color: var(--caraway); }
   .action-card.pack    { border-left-color: var(--pack); }
   .action-card:hover { transform: translateY(-2px); }
+  .action-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding-right: 28px;  /* room for the complete button */
+  }
   .action-countdown {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 3px 9px;
-    border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 3px 9px; border-radius: 999px;
     margin-bottom: 8px;
   }
   .action-countdown.urgent { background: var(--alert-soft); color: var(--alert); }
   .action-countdown.soft   { background: #f1ede1; color: var(--ink-soft); }
   .action-title {
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 4px;
+    font-size: 17px; font-weight: 700; margin-bottom: 4px;
   }
   .action-cta {
-    font-size: 13px;
-    color: var(--ink-soft);
+    font-size: 13px; color: var(--ink-soft);
   }
   .action-cta a { color: var(--magellan); text-decoration: none; font-weight: 600; }
   .action-cta a:hover { text-decoration: underline; }
 
-  /* ============ Calendar grid ============ */
+  /* ============ Calendar ============ */
   .schedule { margin-bottom: 36px; }
   .next-up {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--today-soft);
-    color: var(--today);
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--today-soft); color: var(--today);
     border: 1px solid var(--today);
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 4px 10px;
-    border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 4px 10px; border-radius: 999px;
     margin-bottom: 14px;
   }
   .day-grid {
@@ -169,9 +169,7 @@
     border: 1px solid var(--rule);
     border-radius: 12px;
     padding: 14px 14px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex; flex-direction: column; gap: 10px;
     min-height: 170px;
   }
   .day-card.next {
@@ -180,83 +178,65 @@
     box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.15);
   }
   .day-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    border-bottom: 1px dashed var(--rule);
-    padding-bottom: 8px;
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px dashed var(--rule); padding-bottom: 8px;
   }
   .day-num {
-    font-size: 28px;
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.02em;
+    font-size: 28px; font-weight: 800; line-height: 1; letter-spacing: -0.02em;
   }
   .day-card.next .day-num { color: var(--today); }
   .day-month {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
   }
   .day-name {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-size: 12px; font-weight: 600; color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.06em;
   }
   .day-card.next .day-name { color: var(--today); }
 
   .event {
+    position: relative;
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 10px 30px 10px 12px;  /* right padding for complete button */
     border-left: 4px solid var(--rule);
     background: #fafaf6;
-    position: relative;
   }
   .event.magellan { border-left-color: var(--magellan); background: var(--magellan-soft); }
   .event.caraway  { border-left-color: var(--caraway);  background: var(--caraway-soft); }
   .event.pack     { border-left-color: var(--pack);     background: var(--pack-soft); }
+  .event .complete-btn { top: 8px; right: 8px; width: 20px; height: 20px; font-size: 12px; }
   .event-time {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 2px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 2px;
   }
   .event-title {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 2px;
+    font-size: 14px; font-weight: 700; line-height: 1.3; margin-bottom: 2px;
   }
   .event-detail {
-    font-size: 12px;
-    color: var(--ink-soft);
+    font-size: 12px; color: var(--ink-soft);
   }
   .event-flag {
     display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: var(--alert);
-    color: white;
-    padding: 1px 6px;
-    border-radius: 3px;
-    margin-left: 6px;
-    vertical-align: middle;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--alert); color: white;
+    padding: 1px 6px; border-radius: 3px;
+    margin-left: 6px; vertical-align: middle;
   }
   .event-flag.optional { background: var(--muted); }
 
+  .day-empty {
+    color: var(--muted);
+    font-size: 12px;
+    font-style: italic;
+    padding: 12px 4px;
+  }
+
   /* ============ Info section ============ */
   .info-grid {
-    display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
-    gap: 14px;
+    display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 14px;
   }
   @media (max-width: 980px) { .info-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
@@ -270,25 +250,14 @@
   .info-card.magellan { border-top-color: var(--magellan); }
   .info-card.caraway  { border-top-color: var(--caraway); }
   .info-card.pack     { border-top-color: var(--pack); }
-  .info-card h3 {
-    margin: 0 0 4px;
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .info-card .info-sub {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 12px;
-  }
+  .info-card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 700; }
+  .info-card .info-sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
   .topic { margin-bottom: 10px; }
   .topic-label {
     display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 7px;
-    border-radius: 4px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 7px; border-radius: 4px;
     margin-bottom: 4px;
   }
   .magellan .topic-label { background: var(--magellan-soft); color: var(--magellan); }
@@ -296,6 +265,67 @@
   .pack     .topic-label { background: var(--pack-soft);     color: var(--pack); }
   .topic-body { font-size: 13px; color: var(--ink-soft); }
   .topic-body a { color: var(--magellan); }
+
+  /* ============ Completed section ============ */
+  .completed { margin-top: 36px; }
+  .completed-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 12px;
+  }
+  .completed-header .section-label { margin-bottom: 0; flex: 1; }
+  .clear-all {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 4px 8px; border-radius: 4px;
+  }
+  .clear-all:hover { color: var(--alert); background: var(--alert-soft); }
+  .completed-list {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .completed-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--rule);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .completed-item.magellan { border-left-color: var(--magellan); }
+  .completed-item.caraway  { border-left-color: var(--caraway); }
+  .completed-item.pack     { border-left-color: var(--pack); }
+  .completed-item .check {
+    color: var(--pack);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .completed-item .item-title {
+    flex: 1;
+    color: var(--ink-soft);
+    text-decoration: line-through;
+    text-decoration-color: var(--muted);
+  }
+  .completed-item .item-when {
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .reopen-btn {
+    background: none; border: 1px solid var(--rule); cursor: pointer;
+    color: var(--ink-soft); font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .reopen-btn:hover { background: var(--rule); color: var(--ink); }
+
+  .completed-empty {
+    color: var(--muted);
+    font-size: 13px;
+    font-style: italic;
+    padding: 10px 4px;
+  }
 
   footer {
     margin-top: 32px;
@@ -323,42 +353,55 @@
   <!-- ========= ACTIONS ========= -->
   <section class="actions">
     <div class="section-label">Needs your attention</div>
-    <div class="actions-grid">
+    <div class="actions-grid" id="actions-grid">
 
-      <a class="action-card caraway" href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">
-        <span class="action-countdown urgent">Due in 3 days &middot; Fri May 8</span>
-        <div class="action-title">Maturation presentation opt-in</div>
-        <div class="action-cta">Sign permission form &mdash; <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English</a> &middot; <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a></div>
-      </a>
+      <div class="action-card caraway" data-item-id="action-maturation-form" data-source="caraway" data-title="Maturation presentation opt-in">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">
+          <span class="action-countdown urgent">Due in 3 days &middot; Fri May 8</span>
+          <div class="action-title">Maturation presentation opt-in</div>
+          <div class="action-cta">Sign permission form &mdash; <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English</a> &middot; <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a></div>
+        </a>
+      </div>
 
-      <a class="action-card pack" href="http://www.austinpack162.com/" target="_blank" rel="noopener">
-        <span class="action-countdown urgent">Before Sat May 16</span>
-        <div class="action-title">Pinewood Derby volunteer signup</div>
-        <div class="action-cta">Pack put out a call for race-day volunteers (May 2 announcement)</div>
-      </a>
+      <div class="action-card pack" data-item-id="action-pinewood-volunteer" data-source="pack" data-title="Pinewood Derby volunteer signup">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="http://www.austinpack162.com/" target="_blank" rel="noopener">
+          <span class="action-countdown urgent">Before Sat May 16</span>
+          <div class="action-title">Pinewood Derby volunteer signup</div>
+          <div class="action-cta">Pack put out a call for race-day volunteers (May 2 announcement)</div>
+        </a>
+      </div>
 
-      <a class="action-card caraway" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
-        <span class="action-countdown soft">Before Thu May 14</span>
-        <div class="action-title">Pre-print Texas Play badge</div>
-        <div class="action-cta">4th Grade Texas Play visitor sign-up</div>
-      </a>
+      <div class="action-card caraway" data-item-id="action-texas-play-badge" data-source="caraway" data-title="Pre-print Texas Play badge">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
+          <span class="action-countdown soft">Before Thu May 14</span>
+          <div class="action-title">Pre-print Texas Play badge</div>
+          <div class="action-cta">4th Grade Texas Play visitor sign-up</div>
+        </a>
+      </div>
 
-      <a class="action-card caraway" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
-        <span class="action-countdown soft">Before Thu May 21</span>
-        <div class="action-title">Pre-print Last Day Party badge</div>
-        <div class="action-cta">End-of-year picnic visitor sign-up</div>
-      </a>
+      <div class="action-card caraway" data-item-id="action-last-day-badge" data-source="caraway" data-title="Pre-print Last Day Party badge">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
+          <span class="action-countdown soft">Before Thu May 21</span>
+          <div class="action-title">Pre-print Last Day Party badge</div>
+          <div class="action-cta">End-of-year picnic visitor sign-up</div>
+        </a>
+      </div>
 
     </div>
+    <div id="actions-empty" class="completed-empty" style="display:none;">All action items completed &mdash; nothing pending right now.</div>
   </section>
 
   <!-- ========= SCHEDULE ========= -->
   <section class="schedule">
     <div class="section-label">What's on the calendar</div>
     <span class="next-up">Next event &middot; in 2 days</span>
-    <div class="day-grid">
+    <div class="day-grid" id="day-grid">
 
-      <div class="day-card next">
+      <div class="day-card next" data-day="2026-05-07">
         <div class="day-head">
           <div>
             <div class="day-num">7</div>
@@ -366,14 +409,15 @@
           </div>
           <div class="day-name">Thu</div>
         </div>
-        <div class="event pack">
+        <div class="event pack" data-item-id="event-2026-05-07-pack-meeting" data-source="pack" data-title="Pack Meeting">
+          <button class="complete-btn" aria-label="Mark complete"></button>
           <div class="event-time">6:45 PM</div>
           <div class="event-title">Pack Meeting</div>
           <div class="event-detail">Caraway Elementary cafeteria</div>
         </div>
       </div>
 
-      <div class="day-card">
+      <div class="day-card" data-day="2026-05-08">
         <div class="day-head">
           <div>
             <div class="day-num">8</div>
@@ -381,14 +425,15 @@
           </div>
           <div class="day-name">Fri</div>
         </div>
-        <div class="event caraway">
+        <div class="event caraway" data-item-id="event-2026-05-08-maturation" data-source="caraway" data-title="Maturation Presentation">
+          <button class="complete-btn" aria-label="Mark complete"></button>
           <div class="event-time">School day <span class="event-flag">Action</span></div>
           <div class="event-title">Maturation Presentation</div>
           <div class="event-detail">Opt-in &mdash; sign form before today</div>
         </div>
       </div>
 
-      <div class="day-card">
+      <div class="day-card" data-day="2026-05-14">
         <div class="day-head">
           <div>
             <div class="day-num">14</div>
@@ -396,14 +441,15 @@
           </div>
           <div class="day-name">Thu</div>
         </div>
-        <div class="event caraway">
+        <div class="event caraway" data-item-id="event-2026-05-14-texas-play" data-source="caraway" data-title="4th Grade Texas Play">
+          <button class="complete-btn" aria-label="Mark complete"></button>
           <div class="event-time">7:45 AM <span class="event-flag">Action</span></div>
           <div class="event-title">4th Grade Texas Play</div>
           <div class="event-detail">Pre-print visitor badge to skip the desk</div>
         </div>
       </div>
 
-      <div class="day-card">
+      <div class="day-card" data-day="2026-05-15">
         <div class="day-head">
           <div>
             <div class="day-num">15</div>
@@ -411,14 +457,15 @@
           </div>
           <div class="day-name">Fri</div>
         </div>
-        <div class="event pack">
+        <div class="event pack" data-item-id="event-2026-05-15-pinewood-checkin" data-source="pack" data-title="Pinewood Derby check-in">
+          <button class="complete-btn" aria-label="Mark complete"></button>
           <div class="event-time">3:00 PM</div>
           <div class="event-title">Pinewood Derby check-in</div>
           <div class="event-detail">Technical inspection before race day</div>
         </div>
       </div>
 
-      <div class="day-card">
+      <div class="day-card" data-day="2026-05-16">
         <div class="day-head">
           <div>
             <div class="day-num">16</div>
@@ -426,14 +473,15 @@
           </div>
           <div class="day-name">Sat</div>
         </div>
-        <div class="event pack">
+        <div class="event pack" data-item-id="event-2026-05-16-pinewood-race" data-source="pack" data-title="Pinewood Derby Race Day">
+          <button class="complete-btn" aria-label="Mark complete"></button>
           <div class="event-time">10:00 AM</div>
           <div class="event-title">Pinewood Derby Race Day</div>
           <div class="event-detail">Caraway Elementary cafeteria</div>
         </div>
       </div>
 
-      <div class="day-card">
+      <div class="day-card" data-day="2026-05-21">
         <div class="day-head">
           <div>
             <div class="day-num">21</div>
@@ -441,7 +489,8 @@
           </div>
           <div class="day-name">Thu</div>
         </div>
-        <div class="event caraway">
+        <div class="event caraway" data-item-id="event-2026-05-21-last-day" data-source="caraway" data-title="Last Day Picnic Party">
+          <button class="complete-btn" aria-label="Mark complete"></button>
           <div class="event-time">10:45 AM &ndash; 12:00 PM <span class="event-flag">Action</span></div>
           <div class="event-title">Last Day Picnic Party</div>
           <div class="event-detail">Playground tables &middot; pre-print badge</div>
@@ -506,10 +555,133 @@
     </div>
   </section>
 
+  <!-- ========= COMPLETED ========= -->
+  <section class="completed" id="completed-section" style="display:none;">
+    <div class="completed-header">
+      <div class="section-label">Completed</div>
+      <button class="clear-all" id="clear-all">Clear all</button>
+    </div>
+    <div class="completed-list" id="completed-list"></div>
+  </section>
+
   <footer>
-    Built from forwarded emails &middot; Magellan, Caraway, Pack 162
+    Built from forwarded emails &middot; Magellan, Caraway, Pack 162 &middot; click the &#x2713; on any item to mark it done
   </footer>
 
 </div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'family-dashboard-completed-v1';
+
+  function loadState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      console.warn('Could not save completion state:', e);
+    }
+  }
+
+  function fmtDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  }
+
+  // Cache the original items (with their full markup) so we can restore them on reopen
+  const itemCache = new Map();
+  document.querySelectorAll('[data-item-id]').forEach(el => {
+    itemCache.set(el.dataset.itemId, {
+      title: el.dataset.title || el.querySelector('.action-title, .event-title')?.textContent || el.dataset.itemId,
+      source: el.dataset.source || ''
+    });
+  });
+
+  function render() {
+    const state = loadState();
+    const completedIds = new Set(Object.keys(state));
+
+    // Hide completed items in their original places
+    document.querySelectorAll('[data-item-id]').forEach(el => {
+      el.style.display = completedIds.has(el.dataset.itemId) ? 'none' : '';
+    });
+
+    // Track if every action item is completed (so we can show empty state)
+    const actionsGrid = document.getElementById('actions-grid');
+    const actionItems = actionsGrid.querySelectorAll('[data-item-id]');
+    const allActionsDone = actionItems.length > 0 &&
+      Array.from(actionItems).every(el => completedIds.has(el.dataset.itemId));
+    document.getElementById('actions-empty').style.display = allActionsDone ? '' : 'none';
+
+    // Render completed list (most recent first)
+    const list = document.getElementById('completed-list');
+    list.innerHTML = '';
+    const sorted = Object.keys(state).sort((a, b) =>
+      (state[b].at || '').localeCompare(state[a].at || '')
+    );
+    sorted.forEach(id => {
+      const cached = itemCache.get(id);
+      if (!cached) return;
+      const item = document.createElement('div');
+      item.className = 'completed-item ' + cached.source;
+      item.innerHTML =
+        '<span class="check">✓</span>' +
+        '<span class="item-title"></span>' +
+        '<span class="item-when">Done ' + fmtDate(state[id].at) + '</span>' +
+        '<button class="reopen-btn" data-reopen="' + id + '">Reopen</button>';
+      item.querySelector('.item-title').textContent = cached.title;
+      list.appendChild(item);
+    });
+
+    document.getElementById('completed-section').style.display =
+      sorted.length ? '' : 'none';
+  }
+
+  document.addEventListener('click', function(e) {
+    const completeBtn = e.target.closest('.complete-btn');
+    if (completeBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const card = completeBtn.closest('[data-item-id]');
+      if (!card) return;
+      const state = loadState();
+      state[card.dataset.itemId] = { at: new Date().toISOString() };
+      saveState(state);
+      render();
+      return;
+    }
+
+    const reopenBtn = e.target.closest('.reopen-btn');
+    if (reopenBtn) {
+      e.preventDefault();
+      const state = loadState();
+      delete state[reopenBtn.dataset.reopen];
+      saveState(state);
+      render();
+      return;
+    }
+
+    if (e.target.id === 'clear-all') {
+      if (confirm('Clear all completed items?')) {
+        saveState({});
+        render();
+      }
+    }
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render);
+  } else {
+    render();
+  }
+})();
+</script>
 </body>
 </html>
