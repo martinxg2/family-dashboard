@@ -65,9 +65,7 @@
     letter-spacing: 0.05em;
     color: var(--ink-soft);
   }
-  .legend-swatch {
-    width: 12px; height: 12px; border-radius: 3px;
-  }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
   .swatch-magellan { background: var(--magellan); }
   .swatch-caraway  { background: var(--caraway); }
   .swatch-pack     { background: var(--pack); }
@@ -92,15 +90,14 @@
   }
 
   /* ============ Action bar ============ */
-  .actions {
-    margin-bottom: 36px;
-  }
+  .actions { margin-bottom: 36px; }
   .actions-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
   }
-  @media (max-width: 880px) { .actions-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1100px) { .actions-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px)  { .actions-grid { grid-template-columns: 1fr; } }
   .action-card {
     display: block;
     text-decoration: none;
@@ -112,13 +109,13 @@
     color: inherit;
     transition: transform .12s ease;
   }
+  .action-card.caraway { border-left-color: var(--caraway); }
+  .action-card.pack    { border-left-color: var(--pack); }
   .action-card:hover { transform: translateY(-2px); }
   .action-countdown {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--alert-soft);
-    color: var(--alert);
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -127,10 +124,8 @@
     border-radius: 999px;
     margin-bottom: 8px;
   }
-  .action-countdown.soft {
-    background: #f1ede1;
-    color: var(--ink-soft);
-  }
+  .action-countdown.urgent { background: var(--alert-soft); color: var(--alert); }
+  .action-countdown.soft   { background: #f1ede1; color: var(--ink-soft); }
   .action-title {
     font-size: 17px;
     font-weight: 700;
@@ -145,6 +140,21 @@
 
   /* ============ Calendar grid ============ */
   .schedule { margin-bottom: 36px; }
+  .next-up {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--today-soft);
+    color: var(--today);
+    border: 1px solid var(--today);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
   .day-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -164,7 +174,7 @@
     gap: 10px;
     min-height: 170px;
   }
-  .day-card.today {
+  .day-card.next {
     background: var(--today-soft);
     border-color: var(--today);
     box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.15);
@@ -182,7 +192,7 @@
     line-height: 1;
     letter-spacing: -0.02em;
   }
-  .day-card.today .day-num { color: var(--today); }
+  .day-card.next .day-num { color: var(--today); }
   .day-month {
     font-size: 11px;
     font-weight: 700;
@@ -197,7 +207,7 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
-  .day-card.today .day-name { color: var(--today); }
+  .day-card.next .day-name { color: var(--today); }
 
   .event {
     border-radius: 8px;
@@ -270,9 +280,7 @@
     color: var(--muted);
     margin-bottom: 12px;
   }
-  .topic {
-    margin-bottom: 10px;
-  }
+  .topic { margin-bottom: 10px; }
   .topic-label {
     display: inline-block;
     font-size: 11px;
@@ -286,10 +294,7 @@
   .magellan .topic-label { background: var(--magellan-soft); color: var(--magellan); }
   .caraway  .topic-label { background: var(--caraway-soft);  color: var(--caraway); }
   .pack     .topic-label { background: var(--pack-soft);     color: var(--pack); }
-  .topic-body {
-    font-size: 13px;
-    color: var(--ink-soft);
-  }
+  .topic-body { font-size: 13px; color: var(--ink-soft); }
   .topic-body a { color: var(--magellan); }
 
   footer {
@@ -306,7 +311,7 @@
   <header>
     <div>
       <h1>Family Dashboard</h1>
-      <div class="meta">Wednesday, April 29, 2026 &middot; refreshed today</div>
+      <div class="meta">Tuesday, May 5, 2026 &middot; refreshed today</div>
     </div>
     <div class="legend">
       <span class="legend-item"><span class="legend-swatch swatch-magellan"></span>Magellan</span>
@@ -320,19 +325,25 @@
     <div class="section-label">Needs your attention</div>
     <div class="actions-grid">
 
-      <a class="action-card" href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">
-        <span class="action-countdown">Due in 9 days &middot; Fri May 8</span>
+      <a class="action-card caraway" href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">
+        <span class="action-countdown urgent">Due in 3 days &middot; Fri May 8</span>
         <div class="action-title">Maturation presentation opt-in</div>
         <div class="action-cta">Sign permission form &mdash; <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English</a> &middot; <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a></div>
       </a>
 
-      <a class="action-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
-        <span class="action-countdown soft">Before Thu May 14</span>
-        <div class="action-title">Pre-print Texas Play badge</div>
-        <div class="action-cta">4th Grade Texas Play &mdash; visitor sign-up form</div>
+      <a class="action-card pack" href="http://www.austinpack162.com/" target="_blank" rel="noopener">
+        <span class="action-countdown urgent">Before Sat May 16</span>
+        <div class="action-title">Pinewood Derby volunteer signup</div>
+        <div class="action-cta">Pack put out a call for race-day volunteers (May 2 announcement)</div>
       </a>
 
-      <a class="action-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
+      <a class="action-card caraway" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
+        <span class="action-countdown soft">Before Thu May 14</span>
+        <div class="action-title">Pre-print Texas Play badge</div>
+        <div class="action-cta">4th Grade Texas Play visitor sign-up</div>
+      </a>
+
+      <a class="action-card caraway" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
         <span class="action-countdown soft">Before Thu May 21</span>
         <div class="action-title">Pre-print Last Day Party badge</div>
         <div class="action-cta">End-of-year picnic visitor sign-up</div>
@@ -344,43 +355,14 @@
   <!-- ========= SCHEDULE ========= -->
   <section class="schedule">
     <div class="section-label">What's on the calendar</div>
+    <span class="next-up">Next event &middot; in 2 days</span>
     <div class="day-grid">
 
-      <div class="day-card today">
-        <div class="day-head">
-          <div>
-            <div class="day-num">29</div>
-            <div class="day-month">Apr &middot; Today</div>
-          </div>
-          <div class="day-name">Wed</div>
-        </div>
-        <div class="event pack">
-          <div class="event-time">8:00 PM <span class="event-flag optional">Optional</span></div>
-          <div class="event-title">Pack Committee Meeting</div>
-          <div class="event-detail">7312 Danwood Dr &middot; only if you want to be in the planning loop</div>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="day-head">
-          <div>
-            <div class="day-num">30</div>
-            <div class="day-month">Apr</div>
-          </div>
-          <div class="day-name">Thu</div>
-        </div>
-        <div class="event caraway">
-          <div class="event-time">Until 6:30 PM</div>
-          <div class="event-title">Book Fair Late Night</div>
-          <div class="event-detail">+ TAG Showcase &amp; art displays</div>
-        </div>
-      </div>
-
-      <div class="day-card">
+      <div class="day-card next">
         <div class="day-head">
           <div>
             <div class="day-num">7</div>
-            <div class="day-month">May</div>
+            <div class="day-month">May &middot; Next up</div>
           </div>
           <div class="day-name">Thu</div>
         </div>
@@ -500,7 +482,7 @@
         <div class="info-sub">Recap &amp; references</div>
         <div class="topic">
           <span class="topic-label">Book Fair</span>
-          <div class="topic-body">Open all week. <a href="https://app.smore.com/n/jqeus" target="_blank" rel="noopener">Info page</a>.</div>
+          <div class="topic-body">Wrapped end of last week. <a href="https://app.smore.com/n/jqeus" target="_blank" rel="noopener">Info page</a>.</div>
         </div>
         <div class="topic">
           <span class="topic-label">Apr 28 recap</span>
