@@ -1,0 +1,14 @@
+# macOS Finder noise
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / scratch
+*.log
