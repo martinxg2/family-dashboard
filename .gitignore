@@ -12,3 +12,6 @@
 
 # Logs / scratch
 *.log
+
+# Personal launch agent (has user-specific paths)
+*.plist
