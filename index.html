@@ -117,8 +117,9 @@
     padding: 16px 18px;
     transition: transform .12s ease;
   }
-  .action-card.caraway { border-left-color: var(--caraway); }
-  .action-card.pack    { border-left-color: var(--pack); }
+  .action-card.caraway  { border-left-color: var(--caraway); }
+  .action-card.pack     { border-left-color: var(--pack); }
+  .action-card.magellan { border-left-color: var(--magellan); }
   .action-card:hover { transform: translateY(-2px); }
   .action-link {
     display: block;
@@ -341,7 +342,7 @@
   <header>
     <div>
       <h1>Family Dashboard</h1>
-      <div class="meta">Tuesday, May 5, 2026 &middot; refreshed today</div>
+      <div class="meta">Monday, May 11, 2026 &middot; refreshed today</div>
     </div>
     <div class="legend">
       <span class="legend-item"><span class="legend-swatch swatch-magellan"></span>Magellan</span>
@@ -355,30 +356,21 @@
     <div class="section-label">Needs your attention</div>
     <div class="actions-grid" id="actions-grid">
 
-      <div class="action-card caraway" data-item-id="action-maturation-form" data-source="caraway" data-title="Maturation presentation opt-in">
+      <div class="action-card caraway" data-item-id="action-texas-play-badge" data-source="caraway" data-title="Pre-print Texas Play badge">
         <button class="complete-btn" aria-label="Mark complete"></button>
-        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">
-          <span class="action-countdown urgent">Due in 3 days &middot; Fri May 8</span>
-          <div class="action-title">Maturation presentation opt-in</div>
-          <div class="action-cta">Sign permission form &mdash; <a href="https://docs.google.com/forms/d/e/1FAIpQLSepri8lrl1bJPDTJJyttZs_VROduqzEZs6EroykKeaF5mfFyg/viewform?usp=publish-editor" target="_blank" rel="noopener">English</a> &middot; <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0QSRERgxyH7k9hdTSo5q9dpmMvdseVEr1Jru0DRLDPH-jSQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Espa&ntilde;ol</a></div>
+        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
+          <span class="action-countdown urgent">Due in 3 days &middot; Thu May 14</span>
+          <div class="action-title">Pre-print Texas Play badge</div>
+          <div class="action-cta">4th Grade Texas Play visitor sign-up &mdash; skip the front desk</div>
         </a>
       </div>
 
       <div class="action-card pack" data-item-id="action-pinewood-volunteer" data-source="pack" data-title="Pinewood Derby volunteer signup">
         <button class="complete-btn" aria-label="Mark complete"></button>
         <a class="action-link" href="http://www.austinpack162.com/" target="_blank" rel="noopener">
-          <span class="action-countdown urgent">Before Sat May 16</span>
+          <span class="action-countdown urgent">Before Sat May 16 &middot; 5 days</span>
           <div class="action-title">Pinewood Derby volunteer signup</div>
-          <div class="action-cta">Pack put out a call for race-day volunteers (May 2 announcement)</div>
-        </a>
-      </div>
-
-      <div class="action-card caraway" data-item-id="action-texas-play-badge" data-source="caraway" data-title="Pre-print Texas Play badge">
-        <button class="complete-btn" aria-label="Mark complete"></button>
-        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
-          <span class="action-countdown soft">Before Thu May 14</span>
-          <div class="action-title">Pre-print Texas Play badge</div>
-          <div class="action-cta">4th Grade Texas Play visitor sign-up</div>
+          <div class="action-cta">Pack call for race-day volunteers &mdash; sign up at austinpack162.com</div>
         </a>
       </div>
 
@@ -391,6 +383,24 @@
         </a>
       </div>
 
+      <div class="action-card caraway" data-item-id="action-kce-parent-input-form" data-source="caraway" data-title="KCE Parent Input Form">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeWezvMfG-2-69QvBBqNZiLsWsve5LTXPWdJp4sqr6hv6QokA/viewform" target="_blank" rel="noopener">
+          <span class="action-countdown soft">Before last day &middot; May 21</span>
+          <div class="action-title">KCE Parent Input Form</div>
+          <div class="action-cta">Class roster input for next year &mdash; reminder from Principal Rinehart (May 10)</div>
+        </a>
+      </div>
+
+      <div class="action-card magellan" data-item-id="action-library-books" data-source="magellan" data-title="Return Aria's library books">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="https://web.toddleapp.com/" target="_blank" rel="noopener">
+          <span class="action-countdown soft">By end of May</span>
+          <div class="action-title">Return Aria&rsquo;s library books</div>
+          <div class="action-cta">This week is final checkout; all due &amp; overdue books collected throughout May</div>
+        </a>
+      </div>
+
     </div>
     <div id="actions-empty" class="completed-empty" style="display:none;">All action items completed &mdash; nothing pending right now.</div>
   </section>
@@ -398,46 +408,14 @@
   <!-- ========= SCHEDULE ========= -->
   <section class="schedule">
     <div class="section-label">What's on the calendar</div>
-    <span class="next-up">Next event &middot; in 2 days</span>
+    <span class="next-up">Next event &middot; in 3 days</span>
     <div class="day-grid" id="day-grid">
 
-      <div class="day-card next" data-day="2026-05-07">
-        <div class="day-head">
-          <div>
-            <div class="day-num">7</div>
-            <div class="day-month">May &middot; Next up</div>
-          </div>
-          <div class="day-name">Thu</div>
-        </div>
-        <div class="event pack" data-item-id="event-2026-05-07-pack-meeting" data-source="pack" data-title="Pack Meeting">
-          <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">6:45 PM</div>
-          <div class="event-title">Pack Meeting</div>
-          <div class="event-detail">Caraway Elementary cafeteria</div>
-        </div>
-      </div>
-
-      <div class="day-card" data-day="2026-05-08">
-        <div class="day-head">
-          <div>
-            <div class="day-num">8</div>
-            <div class="day-month">May</div>
-          </div>
-          <div class="day-name">Fri</div>
-        </div>
-        <div class="event caraway" data-item-id="event-2026-05-08-maturation" data-source="caraway" data-title="Maturation Presentation">
-          <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">School day <span class="event-flag">Action</span></div>
-          <div class="event-title">Maturation Presentation</div>
-          <div class="event-detail">Opt-in &mdash; sign form before today</div>
-        </div>
-      </div>
-
-      <div class="day-card" data-day="2026-05-14">
+      <div class="day-card next" data-day="2026-05-14">
         <div class="day-head">
           <div>
             <div class="day-num">14</div>
-            <div class="day-month">May</div>
+            <div class="day-month">May &middot; Next up</div>
           </div>
           <div class="day-name">Thu</div>
         </div>
@@ -507,7 +485,7 @@
 
       <div class="info-card magellan">
         <h3>Magellan &mdash; Aria, Grade 2 (2C)</h3>
-        <div class="info-sub">Latest learning across homeroom &amp; specialists</div>
+        <div class="info-sub">Latest learning across homeroom &amp; specialists &mdash; updated May 4</div>
         <div class="topic">
           <span class="topic-label">Math</span>
           <div class="topic-body">Multiplying by 2, 3, 4, 5, 10 with skip counting and repeated addition.</div>
@@ -518,11 +496,15 @@
         </div>
         <div class="topic">
           <span class="topic-label">Specialists</span>
-          <div class="topic-body">Art using magazines for color &middot; first band repertoire in Music &middot; Astronaut PE stations &middot; Library on Katherine Johnson.</div>
+          <div class="topic-body">Art: sketchbooks finished &amp; tied with ribbons &mdash; great job 2C! &middot; Music: rhythmic &amp; melodic literacy phase, translating staff notation to instruments &mdash; first ensemble piece coming &middot; PE: Newcomb (volleyball lead-up game, throwing/catching over the net) &middot; Library: final checkout this week; all books due throughout May.</div>
         </div>
         <div class="topic">
           <span class="topic-label">Photos</span>
           <div class="topic-body"><a href="https://magellanschool.filecamp.com/s/o/GBEygSt1aOM1gc9Z" target="_blank" rel="noopener">Project share-out gallery</a></div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Camp Everything</span>
+          <div class="topic-body">Barnisons Catering available for camp lunches &mdash; <a href="https://drive.google.com/file/d/1nBidgwNuhyOwVZhGohhT0m_7tQRhNcs1/view?usp=sharing" target="_blank" rel="noopener">account setup info</a> &middot; <a href="https://drive.google.com/file/d/1q-B2V2am29zv4lSiAFeByFogdX/view?usp=sharing" target="_blank" rel="noopener">weekly menu</a></div>
         </div>
       </div>
 
@@ -530,8 +512,8 @@
         <h3>Caraway &mdash; Grade 4, Ms. Lozano</h3>
         <div class="info-sub">Recap &amp; references</div>
         <div class="topic">
-          <span class="topic-label">Book Fair</span>
-          <div class="topic-body">Wrapped end of last week. <a href="https://app.smore.com/n/jqeus" target="_blank" rel="noopener">Info page</a>.</div>
+          <span class="topic-label">Newsletter</span>
+          <div class="topic-body">End-of-year newsletter sent May 11 &mdash; <a href="https://canva.link/w5irm0yv6r8hkz6" target="_blank" rel="noopener">view online</a>. Scroll back to see how much they've grown this year.</div>
         </div>
         <div class="topic">
           <span class="topic-label">Apr 28 recap</span>
@@ -632,7 +614,7 @@
       const item = document.createElement('div');
       item.className = 'completed-item ' + cached.source;
       item.innerHTML =
-        '<span class="check">✓</span>' +
+        '<span class="check">&#x2713;</span>' +
         '<span class="item-title"></span>' +
         '<span class="item-when">Done ' + fmtDate(state[id].at) + '</span>' +
         '<button class="reopen-btn" data-reopen="' + id + '">Reopen</button>';
