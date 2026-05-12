@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Chore Chart</title>
+<style>
+  /* ===== Print-friendly base ===== */
+  @page {
+    size: letter portrait;
+    margin: 0.4in;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #000;
+    background: #f0eee8;
+    line-height: 1.35;
+    padding: 24px;
+  }
+  .sheet {
+    background: #fff;
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    padding: 0.4in;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { box-shadow: none; margin: 0; width: auto; min-height: auto; padding: 0; }
+    .no-print { display: none !important; }
+  }
+
+  /* ===== Header ===== */
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 3px solid #000;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  .head-meta {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+  .head-fields {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .field {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex: 1;
+  }
+  .field-label { font-weight: 700; white-space: nowrap; }
+  .field-line {
+    flex: 1;
+    border-bottom: 1.5px solid #000;
+    height: 18px;
+  }
+
+  /* ===== Chore grid ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, 1fr);
+    border: 2px solid #000;
+    margin-bottom: 14px;
+  }
+  .cell {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 10px 8px;
+    min-height: 64px;
+    position: relative;
+  }
+  .cell:nth-child(5n) { border-right: none; }
+  .grid > .cell:nth-last-child(-n+5) { border-bottom: none; }
+
+  .cell.head-cell {
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 800;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px 4px;
+  }
+  .cell.day-cell {
+    background: #f3efe6;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+  }
+  .check-box {
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid #555;
+    border-radius: 4px;
+    margin: 4px auto 0;
+  }
+
+  /* ===== Allowance totals row ===== */
+  .totals {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding: 10px 14px;
+    border: 2px solid #000;
+    background: #f3efe6;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+  }
+  .totals .field { flex: 1; }
+  .totals .field-line { border-bottom-width: 2px; }
+
+  /* ===== Cut-strip section ===== */
+  .strip-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #444;
+  }
+  .strip-head::before, .strip-head::after {
+    content: "";
+    flex: 1;
+    border-top: 1px dashed #888;
+  }
+  .strips {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    border: 1.5px dashed #000;
+    margin-top: 2px;
+  }
+  .strip {
+    border-right: 1.5px dashed #000;
+    padding: 14px 4px 12px;
+    text-align: center;
+    min-height: 2.1in;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .strip:last-child { border-right: none; }
+  .strip .amount {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #b91c1c;
+  }
+  .strip .label {
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #000;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    margin-top: 6px;
+  }
+  .strip .reason {
+    font-size: 8.5px;
+    line-height: 1.2;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .strip .scissors {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  /* ===== Fine print ===== */
+  footer {
+    margin-top: 10px;
+    font-size: 10px;
+    color: #555;
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== On-screen "Print this" button ===== */
+  .print-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .print-btn:hover { background: #333; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Print this sheet</button>
+
+<div class="sheet">
+
+  <!-- Header -->
+  <div class="head">
+    <h1>Weekly Chore Chart</h1>
+    <div class="head-meta">
+      Piano &middot; Homework &middot; House &middot; Pet
+    </div>
+  </div>
+
+  <div class="head-fields">
+    <div class="field"><span class="field-label">Name</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Week of</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Allowance $</span><span class="field-line"></span></div>
+  </div>
+
+  <!-- Chore grid (7 days × 4 categories) -->
+  <div class="grid">
+    <!-- Header row -->
+    <div class="cell head-cell">Day</div>
+    <div class="cell head-cell">Piano practice</div>
+    <div class="cell head-cell">Homework</div>
+    <div class="cell head-cell">House chore</div>
+    <div class="cell head-cell">Pet</div>
+
+    <!-- Monday -->
+    <div class="cell day-cell">Mon</div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+
+    <!-- Tuesday -->
+    <div class="cell day-cell">Tue</div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+
+    <!-- Wednesday -->
+    <div class="cell day-cell">Wed</div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+
+    <!-- Thursday -->
+    <div class="cell day-cell">Thu</div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+
+    <!-- Friday -->
+    <div class="cell day-cell">Fri</div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+
+    <!-- Saturday -->
+    <div class="cell day-cell">Sat</div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+
+    <!-- Sunday -->
+    <div class="cell day-cell">Sun</div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+    <div class="cell"><div class="check-box"></div></div>
+  </div>
+
+  <!-- Allowance totals -->
+  <div class="totals">
+    <div class="field"><span class="field-label">Earned</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Penalties</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Payout</span><span class="field-line"></span></div>
+  </div>
+
+  <!-- Cut-strip header -->
+  <div class="strip-head">&#9986;&nbsp; Cut along dashed lines &mdash; place on stray shoes, trash, etc.</div>
+
+  <!-- Penalty strips -->
+  <div class="strips">
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Left out</div>
+    </div>
+  </div>
+
+  <footer>
+    Each strip = one dollar off this week's allowance. Hand it to the kid when you place it.
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Community Service Mission Log</title>
+<style>
+  @page { size: letter portrait; margin: 0.35in 0.35in 0.3in 0.35in; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  :root {
+    --forest:    #2d6e3a;
+    --forest-dk: #1b4a23;
+    --forest-lt: #a8c47a;
+    --amber:     #e07d2a;
+    --amber-dk:  #a85510;
+    --sun:       #f5c041;
+    --sky:       #4a9fc7;
+    --sky-lt:    #cde7f0;
+    --earth:     #6b4a2a;
+    --cream:     #fbf3df;
+    --cream-dk:  #eedfb5;
+    --ink:       #2c1d10;
+  }
+  body {
+    font-family: "Trebuchet MS", "Verdana", system-ui, sans-serif;
+    color: var(--ink);
+    background: #b8c89c;
+    padding: 24px;
+  }
+  .sheet {
+    background: var(--cream);
+    width: 8.5in;
+    margin: 0 auto;
+    padding: 0;
+    border: 8px double var(--forest-dk);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.22);
+    display: flex;
+    flex-direction: column;
+    min-height: 11in;
+    overflow: hidden;
+    position: relative;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { box-shadow: none; margin: 0; width: auto; min-height: 11in; border: none; }
+    .no-print { display: none !important; }
+  }
+  .print-btn {
+    position: fixed;
+    top: 20px; right: 20px;
+    background: var(--forest-dk); color: var(--cream);
+    border: 2px solid var(--ink);
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  /* ===== Hero scene ===== */
+  .scene {
+    position: relative;
+    background: linear-gradient(to bottom, var(--sky-lt) 0%, var(--sky-lt) 55%, var(--forest-lt) 55%, var(--forest) 100%);
+    padding: 14px 22px 12px;
+    border-bottom: 4px solid var(--forest-dk);
+    overflow: hidden;
+  }
+  .scene::before {
+    /* sun */
+    content: "";
+    position: absolute;
+    top: 12px; right: 22px;
+    width: 50px; height: 50px;
+    background: radial-gradient(circle, #fde47b 0%, #f5c041 70%, transparent 75%);
+    border-radius: 50%;
+  }
+  .scene::after {
+    /* mountain silhouettes */
+    content: "";
+    position: absolute;
+    bottom: 22px; left: 0; right: 0;
+    height: 30px;
+    background:
+      linear-gradient(125deg, transparent 0%, transparent 5%, var(--forest-dk) 5%, var(--forest-dk) 18%, transparent 18%),
+      linear-gradient(60deg,  transparent 0%, transparent 25%, var(--forest-dk) 25%, var(--forest-dk) 42%, transparent 42%),
+      linear-gradient(110deg, transparent 0%, transparent 60%, var(--forest-dk) 60%, var(--forest-dk) 80%, transparent 80%);
+    opacity: 0.4;
+  }
+  .scene-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 120px;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-svg, .badge-svg { width: 120px; height: 120px; }
+
+  /* Title card */
+  .title-card {
+    text-align: center;
+    background: var(--cream);
+    border: 4px solid var(--forest-dk);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: 4px 4px 0 var(--forest-dk);
+    transform: rotate(-1deg);
+    position: relative;
+  }
+  .title-card::before, .title-card::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    width: 14px; height: 14px;
+    background: var(--amber);
+    border: 2px solid var(--forest-dk);
+    border-radius: 50%;
+  }
+  .title-card::before { left: -6px; }
+  .title-card::after  { right: -6px; }
+  .title-card h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--forest-dk);
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    text-transform: uppercase;
+    font-family: "Georgia", "Times New Roman", serif;
+  }
+  .title-card h1 span { color: var(--amber-dk); }
+  .title-card .sub {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--earth);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ===== Fields ===== */
+  .head-fields {
+    display: flex;
+    gap: 16px;
+    padding: 10px 22px 6px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .field { display: flex; align-items: baseline; gap: 8px; flex: 1; }
+  .field-label { font-weight: 800; white-space: nowrap; color: var(--forest-dk); }
+  .field-line { flex: 1; border-bottom: 2px dotted var(--earth); height: 16px; }
+
+  /* ===== Progress tracker ===== */
+  .progress-wrap {
+    margin: 8px 22px 14px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 3px solid var(--forest-dk);
+    border-radius: 10px;
+  }
+  .progress-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--forest-dk);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .progress-label .target {
+    background: var(--amber);
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+  .circles {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .hour-circle {
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--forest-dk);
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--forest-dk);
+  }
+  /* milestone circles (5, 10, 15, 20) — emphasize them */
+  .hour-circle.milestone {
+    background: var(--sun);
+    border-color: var(--amber-dk);
+    color: var(--amber-dk);
+    box-shadow: 0 0 0 2px var(--cream), 0 0 0 4px var(--amber);
+  }
+  .milestones {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .milestone-badge {
+    text-align: center;
+    padding: 8px 6px;
+    border-radius: 8px;
+    border: 2px dashed var(--forest);
+    background: var(--cream);
+    position: relative;
+  }
+  .milestone-badge svg { width: 32px; height: 32px; margin-bottom: 2px; }
+  .milestone-badge .hr {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--amber-dk);
+    line-height: 1;
+  }
+  .milestone-badge .ttl {
+    font-size: 9.5px;
+    font-weight: 800;
+    color: var(--forest-dk);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  /* ===== Log table ===== */
+  .log-wrap { padding: 0 22px 12px; }
+  .log {
+    display: grid;
+    grid-template-columns: 40px 80px 1fr 1.1fr 60px 70px;
+    border: 3px solid var(--forest-dk);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .log .lc {
+    border-right: 1px solid var(--forest);
+    border-bottom: 1px solid var(--forest);
+    padding: 7px 8px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+  }
+  .log .lc:nth-child(6n) { border-right: none; }
+  .log > .lc:nth-last-child(-n+6) { border-bottom: none; }
+  .log .lc.head {
+    background: var(--forest-dk);
+    color: var(--cream);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 10.5px;
+    font-weight: 800;
+    justify-content: center;
+    min-height: 32px;
+    text-align: center;
+    border-right: 1px solid var(--cream);
+  }
+  .log .lc.head:nth-child(6n) { border-right: none; }
+  .log .lc.num {
+    background: var(--cream-dk);
+    font-weight: 900;
+    color: var(--forest-dk);
+    justify-content: center;
+    font-size: 13px;
+  }
+  /* extra row visual marker — odd row stripe */
+  .log .lc.num:nth-of-type(odd) { background: var(--cream); }
+
+  /* ===== Sign-off ===== */
+  .signoff {
+    margin: 0 22px 14px;
+    padding: 12px 14px;
+    border: 3px solid var(--forest-dk);
+    border-radius: 8px;
+    background: var(--cream-dk);
+    display: flex;
+    gap: 18px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .signoff .field { flex: 1; }
+  .signoff .field-line { border-bottom: 2px solid var(--forest-dk); }
+
+  /* ===== Footer banner ===== */
+  footer {
+    margin: auto 0 0;
+    background: var(--forest-dk);
+    color: var(--cream);
+    padding: 10px 22px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  footer .stars {
+    color: var(--sun);
+    letter-spacing: 0;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Print this log</button>
+
+<div class="sheet">
+
+  <!-- ========= HERO SCENE ========= -->
+  <div class="scene">
+    <div class="scene-row">
+
+      <!-- Explorer kid hero -->
+      <svg class="hero-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- shadow -->
+        <ellipse cx="60" cy="118" rx="32" ry="3" fill="#000" opacity="0.18"/>
+
+        <!-- legs -->
+        <rect x="48" y="86" width="9" height="26" fill="#4a6b3a"/>
+        <rect x="63" y="86" width="9" height="26" fill="#4a6b3a"/>
+        <!-- boots -->
+        <rect x="46" y="108" width="13" height="8" rx="2" fill="#3a2418"/>
+        <rect x="61" y="108" width="13" height="8" rx="2" fill="#3a2418"/>
+
+        <!-- body / shirt -->
+        <path d="M40,58 Q40,52 50,52 L70,52 Q80,52 80,58 L80,90 L40,90 Z" fill="#c8541a"/>
+        <!-- shirt collar -->
+        <path d="M52,52 L60,60 L68,52 Z" fill="#7a2a08"/>
+        <!-- belt -->
+        <rect x="40" y="84" width="40" height="5" fill="#3a2418"/>
+        <rect x="58" y="84" width="4" height="5" fill="#d8a936"/>
+
+        <!-- backpack strap -->
+        <rect x="42" y="56" width="3" height="32" fill="#3a2418"/>
+        <!-- backpack peek behind shoulder -->
+        <rect x="34" y="58" width="10" height="30" rx="3" fill="#3a4a2a"/>
+
+        <!-- arms -->
+        <path d="M40,60 Q32,72 36,84" stroke="#e8b986" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M80,60 Q86,68 82,76" stroke="#e8b986" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+        <!-- thumbs-up hand (right side) -->
+        <circle cx="86" cy="58" r="5" fill="#e8b986"/>
+        <rect x="84" y="48" width="4" height="10" rx="1.5" fill="#e8b986"/>
+
+        <!-- binoculars hanging -->
+        <rect x="50" y="62" width="6" height="8" rx="1" fill="#1a1a1a"/>
+        <rect x="64" y="62" width="6" height="8" rx="1" fill="#1a1a1a"/>
+        <rect x="55" y="64" width="10" height="3" fill="#3a3a3a"/>
+
+        <!-- head -->
+        <circle cx="60" cy="36" r="14" fill="#e8b986"/>
+        <!-- hair (peeking under hat) -->
+        <path d="M48,30 Q54,26 60,28 Q66,26 72,30 L72,34 Q60,32 48,34 Z" fill="#5a3a1a"/>
+        <!-- explorer hat -->
+        <ellipse cx="60" cy="22" rx="20" ry="4" fill="#6b4a2a"/>
+        <rect x="48" y="14" width="24" height="10" rx="2" fill="#6b4a2a"/>
+        <rect x="48" y="20" width="24" height="3" fill="#3a2418"/>
+        <!-- hat band leaf -->
+        <path d="M52,21 L56,18 L57,21 Z" fill="#3b6b2a"/>
+        <!-- eyes -->
+        <circle cx="55" cy="36" r="1.6" fill="#1a1a1a"/>
+        <circle cx="65" cy="36" r="1.6" fill="#1a1a1a"/>
+        <circle cx="55.4" cy="35.4" r="0.5" fill="#fff"/>
+        <circle cx="65.4" cy="35.4" r="0.5" fill="#fff"/>
+        <!-- smile -->
+        <path d="M55,42 Q60,46 65,42" stroke="#1a1a1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- cheeks -->
+        <circle cx="51" cy="40" r="2" fill="#e89a86" opacity="0.6"/>
+        <circle cx="69" cy="40" r="2" fill="#e89a86" opacity="0.6"/>
+      </svg>
+
+      <!-- Title card -->
+      <div class="title-card">
+        <h1>Mission <span>Log</span></h1>
+        <div class="sub">Community Service &middot; 20 Hours of Awesome</div>
+      </div>
+
+      <!-- Service badge (scout-patch style) -->
+      <svg class="badge-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- outer rope ring -->
+        <circle cx="60" cy="60" r="54" fill="#d8a936" stroke="#a07a1a" stroke-width="3"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#a07a1a" stroke-width="1" stroke-dasharray="3 3"/>
+        <!-- inner field -->
+        <circle cx="60" cy="60" r="44" fill="#2d6e3a" stroke="#1b4a23" stroke-width="2"/>
+        <!-- big star -->
+        <polygon points="60,24 67,46 90,46 71,60 78,82 60,69 42,82 49,60 30,46 53,46"
+                 fill="#f5c041" stroke="#a85510" stroke-width="1.5"/>
+        <!-- banner ribbon -->
+        <path d="M22,82 L98,82 L92,98 L60,90 L28,98 Z" fill="#b91c1c" stroke="#7a1010" stroke-width="1.5"/>
+        <text x="60" y="93" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Georgia, serif">SERVICE</text>
+        <!-- top arc text -->
+        <path id="arc" d="M 20,60 A 40,40 0 0 1 100,60" fill="none"/>
+        <text font-size="9" font-weight="bold" fill="#fff" font-family="Georgia, serif" letter-spacing="2">
+          <textPath href="#arc" startOffset="50%" text-anchor="middle">20 HOURS</textPath>
+        </text>
+      </svg>
+
+    </div>
+  </div>
+
+  <!-- ========= FIELDS ========= -->
+  <div class="head-fields">
+    <div class="field"><span class="field-label">Name</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Started</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Goal date</span><span class="field-line"></span></div>
+  </div>
+
+  <!-- ========= PROGRESS ========= -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Hours logged &mdash; color one in for every hour</span>
+      <span class="target">Target: 20</span>
+    </div>
+    <div class="circles">
+      <div class="hour-circle">1</div>
+      <div class="hour-circle">2</div>
+      <div class="hour-circle">3</div>
+      <div class="hour-circle">4</div>
+      <div class="hour-circle milestone">5</div>
+      <div class="hour-circle">6</div>
+      <div class="hour-circle">7</div>
+      <div class="hour-circle">8</div>
+      <div class="hour-circle">9</div>
+      <div class="hour-circle milestone">10</div>
+      <div class="hour-circle">11</div>
+      <div class="hour-circle">12</div>
+      <div class="hour-circle">13</div>
+      <div class="hour-circle">14</div>
+      <div class="hour-circle milestone">15</div>
+      <div class="hour-circle">16</div>
+      <div class="hour-circle">17</div>
+      <div class="hour-circle">18</div>
+      <div class="hour-circle">19</div>
+      <div class="hour-circle milestone">20</div>
+    </div>
+
+    <!-- Milestone badges -->
+    <div class="milestones">
+      <div class="milestone-badge">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="16,4 19.5,12.5 28,13 21.5,19 23.5,28 16,23 8.5,28 10.5,19 4,13 12.5,12.5"
+                   fill="#f5c041" stroke="#a85510" stroke-width="1.2"/>
+        </svg>
+        <div class="hr">5 hr</div>
+        <div class="ttl">Rookie<br>Helper</div>
+      </div>
+      <div class="milestone-badge">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16,3 L26,7 V16 Q26,25 16,30 Q6,25 6,16 V7 Z" fill="#4a9fc7" stroke="#1f5f78" stroke-width="1.4"/>
+          <path d="M11,16 L15,20 L22,12" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <div class="hr">10 hr</div>
+        <div class="ttl">Community<br>Champion</div>
+      </div>
+      <div class="milestone-badge">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="14" r="9" fill="#d8a936" stroke="#a07a1a" stroke-width="1.4"/>
+          <polygon points="16,8 18,13 23,13 19,16 20,21 16,18 12,21 13,16 9,13 14,13"
+                   fill="#fff" stroke="#a07a1a" stroke-width="0.5"/>
+          <path d="M10,22 L8,29 L14,26 M22,22 L24,29 L18,26" fill="#b91c1c" stroke="#7a1010" stroke-width="1"/>
+        </svg>
+        <div class="hr">15 hr</div>
+        <div class="ttl">Service<br>Star</div>
+      </div>
+      <div class="milestone-badge">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9,4 H23 V12 Q23,18 16,18 Q9,18 9,12 Z" fill="#d8a936" stroke="#a07a1a" stroke-width="1.4"/>
+          <path d="M9,8 Q4,8 4,12 Q4,14 9,14 M23,8 Q28,8 28,12 Q28,14 23,14"
+                fill="none" stroke="#a07a1a" stroke-width="1.4"/>
+          <rect x="13" y="18" width="6" height="6" fill="#a07a1a"/>
+          <rect x="9" y="24" width="14" height="3" fill="#6b4a2a"/>
+        </svg>
+        <div class="hr">20 hr</div>
+        <div class="ttl">Hero of<br>the Hood</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= LOG ========= -->
+  <div class="log-wrap">
+    <div class="log">
+      <!-- Header row -->
+      <div class="lc head">#</div>
+      <div class="lc head">Date</div>
+      <div class="lc head">What I did</div>
+      <div class="lc head">Where</div>
+      <div class="lc head">Hours</div>
+      <div class="lc head">Witness</div>
+
+      <!-- 14 rows -->
+      <div class="lc num">1</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">2</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">3</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">4</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">5</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">6</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">7</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">8</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">9</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">10</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">11</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">12</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">13</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+      <div class="lc num">14</div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div>
+    </div>
+  </div>
+
+  <!-- ========= SIGN-OFF ========= -->
+  <div class="signoff">
+    <div class="field"><span class="field-label">Total hours</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Parent signature</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Date</span><span class="field-line"></span></div>
+  </div>
+
+  <!-- ========= FOOTER BANNER ========= -->
+  <footer>
+    <span class="stars">&#9733; &#9733; &#9733;</span>
+    Every hour helps someone &mdash; you got this
+    <span class="stars">&#9733; &#9733; &#9733;</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

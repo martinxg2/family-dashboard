@@ -20,6 +20,8 @@
     --caraway-soft: #fde4d3;
     --pack: #2f7a3a;
     --pack-soft: #d9ecde;
+    --piano: #7c3aed;
+    --piano-soft: #ede4ff;
 
     /* Action / today */
     --alert: #b91c1c;
@@ -59,6 +61,7 @@
   .swatch-magellan { background: var(--magellan); }
   .swatch-caraway  { background: var(--caraway); }
   .swatch-pack     { background: var(--pack); }
+  .swatch-piano    { background: var(--piano); }
 
   .section-label {
     display: flex; align-items: center; gap: 10px;
@@ -120,6 +123,7 @@
   .action-card.caraway  { border-left-color: var(--caraway); }
   .action-card.pack     { border-left-color: var(--pack); }
   .action-card.magellan { border-left-color: var(--magellan); }
+  .action-card.piano    { border-left-color: var(--piano); }
   .action-card:hover { transform: translateY(-2px); }
   .action-link {
     display: block;
@@ -206,6 +210,7 @@
   .event.magellan { border-left-color: var(--magellan); background: var(--magellan-soft); }
   .event.caraway  { border-left-color: var(--caraway);  background: var(--caraway-soft); }
   .event.pack     { border-left-color: var(--pack);     background: var(--pack-soft); }
+  .event.piano    { border-left-color: var(--piano);    background: var(--piano-soft); }
   .event .complete-btn { top: 8px; right: 8px; width: 20px; height: 20px; font-size: 12px; }
   .event-time {
     font-size: 11px; font-weight: 700;
@@ -251,6 +256,7 @@
   .info-card.magellan { border-top-color: var(--magellan); }
   .info-card.caraway  { border-top-color: var(--caraway); }
   .info-card.pack     { border-top-color: var(--pack); }
+  .info-card.piano    { border-top-color: var(--piano); }
   .info-card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 700; }
   .info-card .info-sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
   .topic { margin-bottom: 10px; }
@@ -264,6 +270,7 @@
   .magellan .topic-label { background: var(--magellan-soft); color: var(--magellan); }
   .caraway  .topic-label { background: var(--caraway-soft);  color: var(--caraway); }
   .pack     .topic-label { background: var(--pack-soft);     color: var(--pack); }
+  .piano    .topic-label { background: var(--piano-soft);    color: var(--piano); }
   .topic-body { font-size: 13px; color: var(--ink-soft); }
   .topic-body a { color: var(--magellan); }
 
@@ -297,6 +304,7 @@
   .completed-item.magellan { border-left-color: var(--magellan); }
   .completed-item.caraway  { border-left-color: var(--caraway); }
   .completed-item.pack     { border-left-color: var(--pack); }
+  .completed-item.piano    { border-left-color: var(--piano); }
   .completed-item .check {
     color: var(--pack);
     font-weight: 700;
@@ -342,12 +350,13 @@
   <header>
     <div>
       <h1>Family Dashboard</h1>
-      <div class="meta">Monday, May 11, 2026 &middot; refreshed today</div>
+      <div class="meta">Tuesday, May 12, 2026 &middot; refreshed at 6:14 PM CT</div>
     </div>
     <div class="legend">
       <span class="legend-item"><span class="legend-swatch swatch-magellan"></span>Magellan</span>
       <span class="legend-item"><span class="legend-swatch swatch-caraway"></span>Caraway</span>
       <span class="legend-item"><span class="legend-swatch swatch-pack"></span>Pack 162</span>
+      <span class="legend-item"><span class="legend-swatch swatch-piano"></span>Piano</span>
     </div>
   </header>
 
@@ -359,7 +368,7 @@
       <div class="action-card caraway" data-item-id="action-texas-play-badge" data-source="caraway" data-title="Pre-print Texas Play badge">
         <button class="complete-btn" aria-label="Mark complete"></button>
         <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
-          <span class="action-countdown urgent">Due in 3 days &middot; Thu May 14</span>
+          <span class="action-countdown urgent">Due in 2 days &middot; Thu May 14</span>
           <div class="action-title">Pre-print Texas Play badge</div>
           <div class="action-cta">4th Grade Texas Play visitor sign-up &mdash; skip the front desk</div>
         </a>
@@ -368,7 +377,7 @@
       <div class="action-card pack" data-item-id="action-pinewood-volunteer" data-source="pack" data-title="Pinewood Derby volunteer signup">
         <button class="complete-btn" aria-label="Mark complete"></button>
         <a class="action-link" href="http://www.austinpack162.com/" target="_blank" rel="noopener">
-          <span class="action-countdown urgent">Before Sat May 16 &middot; 5 days</span>
+          <span class="action-countdown urgent">Before Sat May 16 &middot; 4 days</span>
           <div class="action-title">Pinewood Derby volunteer signup</div>
           <div class="action-cta">Pack call for race-day volunteers &mdash; sign up at austinpack162.com</div>
         </a>
@@ -401,6 +410,24 @@
         </a>
       </div>
 
+      <div class="action-card piano" data-item-id="action-piano-fall-registration" data-source="piano" data-title="Piano studio fall registration">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="action-link">
+          <span class="action-countdown soft">Due Mon Jun 1</span>
+          <div class="action-title">Piano studio fall registration</div>
+          <div class="action-cta">$50 annual fee to Charlotte &mdash; holds the Wed 5&ndash;6 pm slot for next year</div>
+        </div>
+      </div>
+
+      <div class="action-card piano" data-item-id="action-piano-summer-planning" data-source="piano" data-title="Reply to Charlotte: summer + fall plans">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="action-link">
+          <span class="action-countdown soft">Open</span>
+          <div class="action-title">Reply re: summer &amp; fall piano plans</div>
+          <div class="action-cta">Summer schedule ($40/30 min, $60/45 min) &middot; fall start preference (earlier Aug vs later May) &middot; Charlotte away May 25&ndash;Jun 1 and Jul 13&ndash;20</div>
+        </div>
+      </div>
+
     </div>
     <div id="actions-empty" class="completed-empty" style="display:none;">All action items completed &mdash; nothing pending right now.</div>
   </section>
@@ -408,14 +435,30 @@
   <!-- ========= SCHEDULE ========= -->
   <section class="schedule">
     <div class="section-label">What's on the calendar</div>
-    <span class="next-up">Next event &middot; in 3 days</span>
+    <span class="next-up">Next event &middot; in 1 day</span>
     <div class="day-grid" id="day-grid">
 
-      <div class="day-card next" data-day="2026-05-14">
+      <div class="day-card next" data-day="2026-05-13">
+        <div class="day-head">
+          <div>
+            <div class="day-num">13</div>
+            <div class="day-month">May &middot; Next up</div>
+          </div>
+          <div class="day-name">Wed</div>
+        </div>
+        <div class="event piano" data-item-id="event-2026-05-13-piano-group-class" data-source="piano" data-title="Piano group class">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">4:30 &ndash; 6:00 PM</div>
+          <div class="event-title">Piano group class</div>
+          <div class="event-detail">Charlotte's studio</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-05-14">
         <div class="day-head">
           <div>
             <div class="day-num">14</div>
-            <div class="day-month">May &middot; Next up</div>
+            <div class="day-month">May</div>
           </div>
           <div class="day-name">Thu</div>
         </div>
@@ -424,6 +467,12 @@
           <div class="event-time">7:45 AM <span class="event-flag">Action</span></div>
           <div class="event-title">4th Grade Texas Play</div>
           <div class="event-detail">Pre-print visitor badge to skip the desk</div>
+        </div>
+        <div class="event piano" data-item-id="event-2026-05-14-duo-crescenda" data-source="piano" data-title="Duo Crescenda performance">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">12:00 PM <span class="event-flag optional">Optional</span></div>
+          <div class="event-title">Duo Crescenda performance</div>
+          <div class="event-detail">Charlotte's duo &middot; Central Presbyterian, downtown Austin &middot; <a href="https://www.facebook.com/CPCThursdayConcerts" target="_blank" rel="noopener">livestream</a></div>
         </div>
       </div>
 
@@ -531,6 +580,23 @@
         <div class="topic">
           <span class="topic-label">Magellan Art</span>
           <div class="topic-body">Save magazines for next year &mdash; Ms. Brenda is collecting them as a color medium.</div>
+        </div>
+      </div>
+
+      <div class="info-card piano">
+        <h3>Piano &mdash; Charlotte Howenstein</h3>
+        <div class="info-sub">Studio rhythm &amp; key dates</div>
+        <div class="topic">
+          <span class="topic-label">Lessons</span>
+          <div class="topic-body">Regular slot: Wed 5&ndash;6 PM. Group class also runs on Wednesdays 4:30&ndash;6:00 PM.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Charlotte away</span>
+          <div class="topic-body">May 25 &ndash; Jun 1, and Jul 13 &ndash; 20. Work around these for any summer lessons.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Summer enrichment</span>
+          <div class="topic-body"><a href="https://suzukiassociation.org/resources/events/institutes/" target="_blank" rel="noopener">Suzuki Summer Institutes</a> directory, if interested.</div>
         </div>
       </div>
 

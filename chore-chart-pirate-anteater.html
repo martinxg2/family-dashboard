@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pirate Anteater Chore Chart</title>
+<style>
+  @page { size: letter portrait; margin: 0.35in 0.35in 0 0.35in; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  :root {
+    --red:       #b91c1c;
+    --red-dk:    #7a1010;
+    --gold:      #d8a936;
+    --gold-dk:   #9a7416;
+    --navy:      #1e3a5f;
+    --navy-dk:   #102538;
+    --sea:       #5a8ca8;
+    --sea-lt:    #a8c8d6;
+    --parchment: #f5e6c8;
+    --parchment-dk: #e6d2a0;
+    --ink:       #2c1810;
+  }
+  body {
+    font-family: "Trebuchet MS", "Verdana", system-ui, sans-serif;
+    color: var(--ink);
+    background: #c8a87a;
+    padding: 24px;
+  }
+  .sheet {
+    background: var(--parchment);
+    width: 8.5in;
+    margin: 0 auto;
+    padding: 0;
+    border: 8px double var(--red-dk);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    min-height: 11in;
+    overflow: hidden;
+    position: relative;
+  }
+  /* Subtle aged paper effect */
+  .sheet::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse at top left,    rgba(120,70,30,0.20), transparent 50%),
+      radial-gradient(ellipse at top right,   rgba(120,70,30,0.20), transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(120,70,30,0.20), transparent 50%),
+      radial-gradient(ellipse at bottom right,rgba(120,70,30,0.20), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sheet > * { position: relative; z-index: 1; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { box-shadow: none; margin: 0; width: auto; min-height: 11in; border: none; }
+    .no-print { display: none !important; }
+  }
+
+  /* ===== Hero scene (sea + sky) ===== */
+  .scene {
+    position: relative;
+    background: linear-gradient(to bottom, var(--sea-lt) 0%, var(--sea-lt) 55%, var(--sea) 55%, var(--navy) 100%);
+    padding: 14px 22px 12px;
+    border-bottom: 4px solid var(--red-dk);
+    overflow: hidden;
+  }
+  /* Wave layers */
+  .scene::before {
+    content: "";
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 12px;
+    background:
+      radial-gradient(ellipse at 10% 50%, var(--sea-lt) 0 6px, transparent 7px),
+      radial-gradient(ellipse at 25% 50%, var(--sea-lt) 0 6px, transparent 7px),
+      radial-gradient(ellipse at 40% 50%, var(--sea-lt) 0 6px, transparent 7px),
+      radial-gradient(ellipse at 55% 50%, var(--sea-lt) 0 6px, transparent 7px),
+      radial-gradient(ellipse at 70% 50%, var(--sea-lt) 0 6px, transparent 7px),
+      radial-gradient(ellipse at 85% 50%, var(--sea-lt) 0 6px, transparent 7px);
+    opacity: 0.7;
+  }
+  /* Sun (low, behind the title) */
+  .scene::after {
+    content: "";
+    position: absolute;
+    top: 14px; right: 240px;
+    width: 44px; height: 44px;
+    background: radial-gradient(circle, #ffe27a 0%, #f5a93b 70%, transparent 75%);
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .scene-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 130px;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .anteater-svg, .compass-svg { width: 130px; height: 130px; }
+
+  /* Title card (tilted poster) */
+  .title-card {
+    text-align: center;
+    background: var(--parchment);
+    border: 4px solid var(--red-dk);
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: 4px 4px 0 var(--red-dk);
+    transform: rotate(-1.5deg);
+    position: relative;
+  }
+  .title-card::before, .title-card::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border: 2px solid var(--red-dk);
+    border-radius: 50%;
+  }
+  .title-card::before { left: -6px; }
+  .title-card::after  { right: -6px; }
+  .title-card h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--red-dk);
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    text-transform: uppercase;
+    font-family: "Georgia", "Times New Roman", serif;
+  }
+  .title-card h1 span { color: var(--gold-dk); }
+  .title-card .sub {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* Speech bubble (from anteater) */
+  .bubble {
+    position: absolute;
+    top: 6px;
+    left: 138px;
+    background: #fff;
+    border: 2.5px solid var(--red-dk);
+    border-radius: 14px;
+    padding: 5px 10px;
+    font-weight: 800;
+    font-size: 12px;
+    color: var(--red-dk);
+    transform: rotate(-3deg);
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: 2px 2px 0 var(--red-dk);
+    font-family: "Georgia", serif;
+    font-style: italic;
+  }
+  .bubble::after {
+    content: "";
+    position: absolute;
+    left: -10px; bottom: 6px;
+    width: 0; height: 0;
+    border: 6px solid transparent;
+    border-right-color: var(--red-dk);
+  }
+  .bubble::before {
+    content: "";
+    position: absolute;
+    left: -6px; bottom: 8px;
+    width: 0; height: 0;
+    border: 4px solid transparent;
+    border-right-color: #fff;
+    z-index: 2;
+  }
+
+  /* ===== Fields ===== */
+  .head-fields {
+    display: flex;
+    gap: 18px;
+    padding: 12px 22px 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .field { display: flex; align-items: baseline; gap: 8px; flex: 1; }
+  .field-label { font-weight: 800; white-space: nowrap; color: var(--red-dk); }
+  .field-line { flex: 1; border-bottom: 2px dotted var(--red-dk); height: 16px; }
+
+  /* ===== Grid ===== */
+  .grid-wrap { padding: 0 22px 12px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.1fr repeat(4, 1fr);
+    border: 3px solid var(--red-dk);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fffaf0;
+  }
+  .cell {
+    border-right: 1px solid var(--red-dk);
+    border-bottom: 1px solid var(--red-dk);
+    padding: 8px 6px;
+    min-height: 58px;
+  }
+  .cell:nth-child(5n) { border-right: none; }
+  .grid > .cell:nth-last-child(-n+5) { border-bottom: none; }
+  .cell.head-cell {
+    background: var(--red-dk);
+    color: var(--parchment);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11.5px;
+    font-weight: 800;
+    min-height: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    text-align: center;
+    padding: 4px;
+    border-right: 1px solid var(--parchment);
+  }
+  .cell.head-cell:last-of-type { border-right: none; }
+  .cell.head-cell svg { width: 22px; height: 22px; }
+  .cell.day-cell {
+    background: var(--parchment-dk);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    color: var(--red-dk);
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    position: relative;
+  }
+  .cell.day-cell::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border: 1.5px solid var(--red-dk);
+    border-radius: 50%;
+  }
+  .check-box {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--red-dk);
+    border-radius: 4px;
+    margin: 4px auto 0;
+    background: #fff;
+  }
+
+  /* ===== Totals ===== */
+  .totals {
+    margin: 0 22px 12px;
+    display: flex;
+    gap: 14px;
+    padding: 10px 14px;
+    border: 3px solid var(--red-dk);
+    border-radius: 8px;
+    background: var(--parchment-dk);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 900;
+    color: var(--red-dk);
+  }
+  .totals .field { flex: 1; }
+  .totals .field-line { border-bottom: 2.5px solid var(--red-dk); }
+
+  /* ===== Infractions box ===== */
+  .infractions {
+    margin: 0 22px 8px;
+    padding: 10px 14px;
+    border: 2.5px dashed var(--red-dk);
+    border-radius: 8px;
+    background: var(--parchment-dk);
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  .infractions-title {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--red-dk);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    border-right: 2px solid var(--red-dk);
+    padding-right: 12px;
+    font-family: "Georgia", serif;
+  }
+  .infractions-title small {
+    display: block;
+    font-size: 11px;
+    color: var(--navy);
+    letter-spacing: 0.1em;
+    margin-top: 3px;
+    font-style: italic;
+  }
+  .infraction {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .infraction svg {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    color: var(--red-dk);
+  }
+
+  /* ===== Strip header ===== */
+  .strip-head {
+    margin: 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    font-family: "Georgia", serif;
+    font-style: italic;
+  }
+  .strip-head::before, .strip-head::after {
+    content: ""; flex: 1; border-top: 2px dashed var(--red-dk);
+  }
+
+  /* ===== Strips (flush to bottom, gold-coin themed) ===== */
+  .strips {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    margin-top: auto;
+    border-top: 2.5px dashed var(--red-dk);
+    background: var(--parchment);
+  }
+  .strip {
+    border-right: 2px dashed var(--red-dk);
+    padding: 8px 4px 12px;
+    min-height: 2.2in;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background:
+      radial-gradient(circle at 50% 30%, var(--parchment) 0%, var(--parchment-dk) 100%);
+    position: relative;
+  }
+  .strip:last-child { border-right: none; }
+  .strip .scissors {
+    font-size: 12px;
+    color: var(--red-dk);
+    margin-bottom: 2px;
+  }
+  .strip .coin {
+    width: 60px; height: 60px;
+    margin-bottom: 2px;
+  }
+  .strip .amount {
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--red-dk);
+    text-shadow: 1.5px 1.5px 0 var(--gold);
+    font-family: "Georgia", serif;
+  }
+  .strip .reason {
+    font-size: 9px;
+    line-height: 1.15;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 800;
+    margin-top: 4px;
+  }
+
+  .print-btn {
+    position: fixed;
+    top: 20px; right: 20px;
+    background: var(--red-dk); color: var(--parchment);
+    border: 2px solid var(--ink);
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Print this sheet</button>
+
+<div class="sheet">
+
+  <!-- ========= HERO SCENE ========= -->
+  <div class="scene">
+    <div class="scene-row">
+
+      <!-- Pirate Anteater (standing on barrel, telescope) -->
+      <svg class="anteater-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- barrel under feet -->
+        <ellipse cx="48" cy="110" rx="22" ry="4" fill="#5a3a1a"/>
+        <rect x="30" y="92" width="36" height="20" rx="4" fill="#8a5530"/>
+        <line x1="30" y1="98" x2="66" y2="98" stroke="#3a2010" stroke-width="2"/>
+        <line x1="30" y1="106" x2="66" y2="106" stroke="#3a2010" stroke-width="2"/>
+        <line x1="48" y1="92" x2="48" y2="112" stroke="#3a2010" stroke-width="1.5"/>
+
+        <!-- bushy tail behind -->
+        <path d="M16,80 Q2,72 0,52 Q8,60 16,66 Q12,74 18,80 Z" fill="#5a3a2e"/>
+        <path d="M3,54 Q0,42 4,38 M10,64 Q5,54 8,46" stroke="#3a2418" stroke-width="1.2" fill="none"/>
+
+        <!-- legs -->
+        <rect x="38" y="80" width="8" height="14" fill="#3a2418"/>
+        <rect x="52" y="80" width="8" height="14" fill="#3a2418"/>
+
+        <!-- body -->
+        <ellipse cx="48" cy="72" rx="22" ry="14" fill="#5a3a2e"/>
+        <!-- vest stripes -->
+        <path d="M36,66 Q48,74 60,66 L60,82 Q48,86 36,82 Z" fill="#1e3a5f"/>
+        <path d="M40,68 L40,84 M48,72 L48,86 M56,68 L56,84" stroke="#d8a936" stroke-width="0.6"/>
+
+        <!-- coin pouch on belt -->
+        <circle cx="58" cy="80" r="5" fill="#d8a936" stroke="#9a7416" stroke-width="1"/>
+        <text x="58" y="83" font-size="6" font-weight="bold" fill="#9a7416" text-anchor="middle">$</text>
+
+        <!-- head + long snout -->
+        <ellipse cx="60" cy="48" rx="14" ry="11" fill="#5a3a2e"/>
+        <path d="M70,44 Q88,40 96,42 L96,52 Q88,54 70,52 Z" fill="#5a3a2e"/>
+        <ellipse cx="94" cy="46" rx="3" ry="1.5" fill="#2b1a10"/>
+
+        <!-- eye + eyepatch -->
+        <circle cx="58" cy="44" r="2" fill="#000"/>
+        <rect x="52" y="40" width="14" height="6" fill="#000" rx="1"/>
+        <line x1="48" y1="40" x2="66" y2="40" stroke="#000" stroke-width="1.5"/>
+
+        <!-- ear -->
+        <path d="M50,36 Q48,28 52,30 Z" fill="#3a2418"/>
+
+        <!-- tricorn hat -->
+        <path d="M44,30 Q60,16 80,30 L78,34 Q72,28 64,28 Q56,26 50,28 Q46,28 42,34 Z" fill="#1a1a1a"/>
+        <path d="M54,23 L66,23 L64,26 L56,26 Z" fill="#b91c1c"/>
+        <!-- skull on hat -->
+        <circle cx="60" cy="24" r="3" fill="#fff"/>
+        <circle cx="59" cy="24" r="0.8" fill="#000"/>
+        <circle cx="61" cy="24" r="0.8" fill="#000"/>
+        <rect x="59" y="25.5" width="2" height="1.5" fill="#fff"/>
+
+        <!-- telescope held in hand -->
+        <rect x="68" y="60" width="22" height="4" rx="1.5" fill="#3a2418"/>
+        <rect x="86" y="59" width="6" height="6" rx="1" fill="#888"/>
+        <rect x="66" y="60" width="4" height="4" rx="1" fill="#d8a936"/>
+
+        <!-- hook on opposite arm -->
+        <path d="M32,76 Q26,82 30,86 Q34,84 34,80 Z" fill="#c0c0c0" stroke="#555" stroke-width="0.5"/>
+      </svg>
+
+      <!-- Title card -->
+      <div class="title-card">
+        <h1>The <span>Pirate</span><br>Anteater's Log</h1>
+        <div class="sub">Weekly Bounty &middot; Yo-Ho-Ho</div>
+      </div>
+
+      <!-- Compass rose -->
+      <svg class="compass-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- outer rope ring -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#8a5530" stroke-width="3" stroke-dasharray="4 3"/>
+        <circle cx="60" cy="60" r="48" fill="#f5e6c8" stroke="#5a3a1a" stroke-width="1.5"/>
+        <!-- 8-point star -->
+        <polygon points="60,16 65,55 60,60 55,55" fill="#b91c1c" stroke="#7a1010" stroke-width="0.8"/>
+        <polygon points="60,104 55,65 60,60 65,65" fill="#d8a936" stroke="#9a7416" stroke-width="0.8"/>
+        <polygon points="16,60 55,55 60,60 55,65" fill="#d8a936" stroke="#9a7416" stroke-width="0.8"/>
+        <polygon points="104,60 65,65 60,60 65,55" fill="#b91c1c" stroke="#7a1010" stroke-width="0.8"/>
+        <!-- diagonals -->
+        <polygon points="28,28 56,56 60,60 56,52" fill="#1e3a5f" opacity="0.85"/>
+        <polygon points="92,28 64,56 60,60 68,56" fill="#1e3a5f" opacity="0.85"/>
+        <polygon points="28,92 56,64 60,60 52,64" fill="#1e3a5f" opacity="0.85"/>
+        <polygon points="92,92 64,64 60,60 64,68" fill="#1e3a5f" opacity="0.85"/>
+        <!-- center hub -->
+        <circle cx="60" cy="60" r="6" fill="#7a1010"/>
+        <circle cx="60" cy="60" r="2.5" fill="#d8a936"/>
+        <!-- N E S W markers -->
+        <text x="60" y="14"  font-size="9" font-weight="bold" fill="#7a1010" text-anchor="middle">N</text>
+        <text x="108" y="64" font-size="9" font-weight="bold" fill="#7a1010" text-anchor="middle">E</text>
+        <text x="60" y="116" font-size="9" font-weight="bold" fill="#7a1010" text-anchor="middle">S</text>
+        <text x="12" y="64"  font-size="9" font-weight="bold" fill="#7a1010" text-anchor="middle">W</text>
+      </svg>
+
+    </div>
+  </div>
+
+  <!-- ========= FIELDS ========= -->
+  <div class="head-fields">
+    <div class="field"><span class="field-label">Captain</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Week of</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Treasure $</span><span class="field-line"></span></div>
+  </div>
+
+  <!-- ========= GRID ========= -->
+  <div class="grid-wrap">
+    <div class="grid">
+      <!-- Header row with themed icons -->
+      <div class="cell head-cell">Day</div>
+      <div class="cell head-cell">
+        <!-- Treasure chest with piano keys -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M3 10 q0 -5 9 -5 t9 5 v9 H3 z" fill="currentColor" opacity="0.18"/>
+          <path d="M3 10 q0 -5 9 -5 t9 5 v9 H3 z"/>
+          <line x1="3" y1="13" x2="21" y2="13"/>
+          <line x1="7" y1="13" x2="7" y2="19"/>
+          <line x1="11" y1="13" x2="11" y2="19"/>
+          <line x1="15" y1="13" x2="15" y2="19"/>
+          <line x1="19" y1="13" x2="19" y2="19"/>
+          <circle cx="12" cy="10" r="1.4" fill="currentColor"/>
+        </svg>
+        Piano
+      </div>
+      <div class="cell head-cell">
+        <!-- Scroll -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M5 4 q3 -2 6 0 v14 q-3 2 -6 0 z" fill="currentColor" opacity="0.18"/>
+          <path d="M5 4 q3 -2 6 0 v14 q-3 2 -6 0 z"/>
+          <path d="M11 4 h7 v14 h-7"/>
+          <line x1="13" y1="9" x2="17" y2="9"/>
+          <line x1="13" y1="13" x2="17" y2="13"/>
+        </svg>
+        Homework
+      </div>
+      <div class="cell head-cell">
+        <!-- Bucket & mop -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M16 3 l-2 12" />
+          <path d="M11 16 l-3 -3 l4 -1 l3 3 z" fill="currentColor" opacity="0.18"/>
+          <path d="M11 16 l-3 -3 l4 -1 l3 3 z"/>
+          <line x1="9" y1="18" x2="7" y2="22"/>
+          <line x1="11" y1="20" x2="11" y2="22.5"/>
+          <line x1="13" y1="18" x2="15" y2="22"/>
+          <line x1="15" y1="3" x2="18" y2="6"/>
+        </svg>
+        House chore
+      </div>
+      <div class="cell head-cell">
+        <!-- Parrot silhouette -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M15 4 q4 0 5 5 q0 5 -4 7 l-2 5 l-3 -3 l-4 1 q-3 -3 -1 -7 q2 -4 6 -5 z" fill="currentColor" opacity="0.18"/>
+          <path d="M15 4 q4 0 5 5 q0 5 -4 7 l-2 5 l-3 -3 l-4 1 q-3 -3 -1 -7 q2 -4 6 -5 z"/>
+          <circle cx="17" cy="8" r="0.8" fill="currentColor"/>
+          <path d="M20 9 l2 1 l-2 1"/>
+        </svg>
+        Pet
+      </div>
+
+      <!-- 7 days -->
+      <div class="cell day-cell">Mon</div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+
+      <div class="cell day-cell">Tue</div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+
+      <div class="cell day-cell">Wed</div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+
+      <div class="cell day-cell">Thu</div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+
+      <div class="cell day-cell">Fri</div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+
+      <div class="cell day-cell">Sat</div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+
+      <div class="cell day-cell">Sun</div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+      <div class="cell"><div class="check-box"></div></div>
+    </div>
+  </div>
+
+  <!-- ========= TOTALS ========= -->
+  <div class="totals">
+    <div class="field"><span class="field-label">Doubloons earned</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Walked the plank</span><span class="field-line"></span></div>
+    <div class="field"><span class="field-label">Payout</span><span class="field-line"></span></div>
+  </div>
+
+  <!-- ========= INFRACTIONS ========= -->
+  <div class="infractions">
+    <div class="infractions-title">Plank-worthy<br>offenses<small>(each &minus;$1)</small></div>
+    <div class="infraction">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M5 7 h14 l-1 14 H6 z" fill="currentColor" opacity="0.18"/>
+        <path d="M5 7 h14 l-1 14 H6 z"/>
+        <line x1="3" y1="7" x2="21" y2="7"/>
+        <path d="M9 7 V4 h6 v3"/>
+        <line x1="10" y1="11" x2="10" y2="18"/>
+        <line x1="14" y1="11" x2="14" y2="18"/>
+      </svg>
+      Trash left lying around
+    </div>
+    <div class="infraction">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="13" r="8" fill="currentColor" opacity="0.18"/>
+        <circle cx="12" cy="13" r="8"/>
+        <polyline points="12,8 12,13 16,15"/>
+        <line x1="10" y1="3" x2="14" y2="3"/>
+      </svg>
+      Late to piano,<br>fencing, or school
+    </div>
+    <div class="infraction">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 14 h18 v6 H3 z" fill="currentColor" opacity="0.18"/>
+        <path d="M3 14 h18 v6 H3 z"/>
+        <path d="M3 14 q3 -5 8 -4 t10 4"/>
+        <line x1="3" y1="20" x2="3" y2="22"/>
+        <line x1="21" y1="20" x2="21" y2="22"/>
+        <circle cx="8" cy="11" r="1.2" fill="currentColor"/>
+        <circle cx="16" cy="10" r="1.2" fill="currentColor"/>
+      </svg>
+      Cabin not shipshape<br>(messy room)
+    </div>
+  </div>
+
+  <!-- ========= STRIP HEADER ========= -->
+  <div class="strip-head">&#9986; &nbsp;Snip along the dashes &middot; clip a coin to the offense &middot; one doubloon lost&nbsp; &#9986;</div>
+
+  <!-- ========= STRIPS (flush to bottom, gold-coin themed) ========= -->
+  <div class="strips">
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <!-- skull -->
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <!-- bones -->
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+    <div class="strip">
+      <span class="scissors">&#9986;</span>
+      <svg class="coin" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="26" fill="#d8a936" stroke="#9a7416" stroke-width="2"/>
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#9a7416" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="30" cy="26" r="7" fill="#7a1010"/>
+        <circle cx="27" cy="26" r="1.8" fill="#fff"/>
+        <circle cx="33" cy="26" r="1.8" fill="#fff"/>
+        <rect x="28" y="30" width="4" height="2" fill="#fff"/>
+        <line x1="22" y1="40" x2="38" y2="32" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="22" y1="32" x2="38" y2="40" stroke="#7a1010" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="amount">&minus;$1</div>
+      <div class="reason">Plank<br>walked</div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
