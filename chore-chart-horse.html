@@ -32,17 +32,17 @@
     width: 8.5in;
     margin: 0 auto;
     padding: 0;
-    border: 8px double var(--grass-dk);
+    border: 6px double var(--grass-dk);
     box-shadow: 0 6px 22px rgba(0,0,0,0.22);
     display: flex;
     flex-direction: column;
-    min-height: 11in;
+    min-height: 10.5in;
     overflow: hidden;
     position: relative;
   }
   @media print {
     body { background: #fff; padding: 0; }
-    .sheet { box-shadow: none; margin: 0; width: auto; min-height: 11in; border: none; }
+    .sheet { box-shadow: none; margin: 0; width: auto; min-height: 10.3in; max-height: 10.3in; border: none; padding-top: 0; }
     .no-print { display: none !important; }
   }
 
@@ -186,8 +186,8 @@
   .cell {
     border-right: 1px solid var(--grass-dk);
     border-bottom: 1px solid var(--grass-dk);
-    padding: 8px 6px;
-    min-height: 58px;
+    padding: 6px 6px;
+    min-height: 50px;
   }
   .cell:nth-child(5n) { border-right: none; }
   .grid > .cell:nth-last-child(-n+5) { border-bottom: none; }
@@ -331,8 +331,8 @@
   }
   .strip {
     border-right: 2px dashed var(--grass-dk);
-    padding: 8px 4px 12px;
-    min-height: 2.2in;
+    padding: 6px 4px 8px;
+    min-height: 1.85in;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
