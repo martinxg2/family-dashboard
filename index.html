@@ -242,7 +242,7 @@
 
   /* ============ Info section ============ */
   .info-grid {
-    display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 14px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
   }
   @media (max-width: 980px) { .info-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
@@ -350,7 +350,7 @@
   <header>
     <div>
       <h1>Family Dashboard</h1>
-      <div class="meta">Wednesday, May 13, 2026 &middot; refreshed at 7:00 AM CT</div>
+      <div class="meta">Tuesday, September 22, 2026 &middot; refreshed at 8:25 PM CT</div>
     </div>
     <div class="legend">
       <span class="legend-item"><span class="legend-swatch swatch-magellan"></span>Magellan</span>
@@ -365,66 +365,75 @@
     <div class="section-label">Needs your attention</div>
     <div class="actions-grid" id="actions-grid">
 
-      <div class="action-card caraway" data-item-id="action-texas-play-badge" data-source="caraway" data-title="Pre-print Texas Play badge">
-        <button class="complete-btn" aria-label="Mark complete"></button>
-        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
-          <span class="action-countdown urgent">Due tomorrow &middot; Thu May 14</span>
-          <div class="action-title">Pre-print Texas Play badge</div>
-          <div class="action-cta">4th Grade Texas Play visitor sign-up &mdash; skip the front desk</div>
-        </a>
-      </div>
-
-      <div class="action-card pack" data-item-id="action-pinewood-volunteer" data-source="pack" data-title="Pinewood Derby volunteer signup">
-        <button class="complete-btn" aria-label="Mark complete"></button>
-        <a class="action-link" href="http://www.austinpack162.com/" target="_blank" rel="noopener">
-          <span class="action-countdown urgent">Before Sat May 16 &middot; 3 days</span>
-          <div class="action-title">Pinewood Derby volunteer signup</div>
-          <div class="action-cta">Pack call for race-day volunteers &mdash; sign up at austinpack162.com</div>
-        </a>
-      </div>
-
-      <div class="action-card caraway" data-item-id="action-last-day-badge" data-source="caraway" data-title="Pre-print Last Day Party badge">
-        <button class="complete-btn" aria-label="Mark complete"></button>
-        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfdMYuLxNWv2R3epFcANt7K_2aMvXqeXszTPc3gG89gHxFGXg/formResponse" target="_blank" rel="noopener">
-          <span class="action-countdown soft">Before Thu May 21</span>
-          <div class="action-title">Pre-print Last Day Party badge</div>
-          <div class="action-cta">End-of-year picnic visitor sign-up</div>
-        </a>
-      </div>
-
-      <div class="action-card caraway" data-item-id="action-kce-parent-input-form" data-source="caraway" data-title="KCE Parent Input Form">
-        <button class="complete-btn" aria-label="Mark complete"></button>
-        <a class="action-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeWezvMfG-2-69QvBBqNZiLsWsve5LTXPWdJp4sqr6hv6QokA/viewform" target="_blank" rel="noopener">
-          <span class="action-countdown soft">Before last day &middot; May 21</span>
-          <div class="action-title">KCE Parent Input Form</div>
-          <div class="action-cta">Class roster input for next year &mdash; reminder from Principal Rinehart (May 10)</div>
-        </a>
-      </div>
-
-      <div class="action-card magellan" data-item-id="action-library-books" data-source="magellan" data-title="Return Aria's library books">
-        <button class="complete-btn" aria-label="Mark complete"></button>
-        <a class="action-link" href="https://web.toddleapp.com/" target="_blank" rel="noopener">
-          <span class="action-countdown soft">By end of May</span>
-          <div class="action-title">Return Aria&rsquo;s library books</div>
-          <div class="action-cta">This week is final checkout; all due &amp; overdue books collected throughout May</div>
-        </a>
-      </div>
-
-      <div class="action-card piano" data-item-id="action-piano-fall-registration" data-source="piano" data-title="Piano studio fall registration">
+      <div class="action-card caraway" data-item-id="action-homecoming-float" data-source="caraway" data-title="Homecoming float sign-up + candy">
         <button class="complete-btn" aria-label="Mark complete"></button>
         <div class="action-link">
-          <span class="action-countdown soft">Due Mon Jun 1</span>
-          <div class="action-title">Piano studio fall registration</div>
-          <div class="action-cta">$50 annual fee to Charlotte &mdash; holds the Wed 5&ndash;6 pm slot for next year</div>
+          <span class="action-countdown urgent">Tomorrow &middot; Wed Sep 23</span>
+          <div class="action-title">Homecoming parade &mdash; float or sidewalk?</div>
+          <div class="action-cta">Sign up to ride the Caraway float with Hoot the Owl, or just spectate. Candy donations go to the main office.</div>
         </div>
       </div>
 
-      <div class="action-card piano" data-item-id="action-piano-summer-planning" data-source="piano" data-title="Reply to Charlotte: summer + fall plans">
+      <div class="action-card caraway" data-item-id="action-powerschool-consent" data-source="caraway" data-title="PowerSchool consent forms">
         <button class="complete-btn" aria-label="Mark complete"></button>
         <div class="action-link">
-          <span class="action-countdown soft">Open</span>
-          <div class="action-title">Reply re: summer &amp; fall piano plans</div>
-          <div class="action-cta">Summer schedule ($40/30 min, $60/45 min) &middot; fall start preference (earlier Aug vs later May) &middot; Charlotte away May 25&ndash;Jun 1 and Jul 13&ndash;20</div>
+          <span class="action-countdown urgent">ASAP &middot; overdue</span>
+          <div class="action-title">PowerSchool opt-in forms</div>
+          <div class="action-cta">First-week glitches are fixed. Log in &rarr; Dashboard &rarr; Annual Student Forms &rarr; Edit &rarr; Agreements.</div>
+        </div>
+      </div>
+
+      <div class="action-card caraway" data-item-id="action-grading-policy-ack" data-source="caraway" data-title="5th grade grading policy acknowledgement">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="action-link">
+          <span class="action-countdown urgent">Return to Mr. Baird</span>
+          <div class="action-title">5th Grade Grading Policy signature</div>
+          <div class="action-cta">Paper came home in the Tuesday folder. Sign and send back.</div>
+        </div>
+      </div>
+
+      <div class="action-card piano" data-item-id="action-piano-theory-test-reg" data-source="piano" data-title="Fall Theory Test registration">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="action-link">
+          <span class="action-countdown urgent">Due in 8 days &middot; Wed Sep 30</span>
+          <div class="action-title">Fall Theory Test registration</div>
+          <div class="action-cta">Test is Nov 7. Tell Charlotte if interested &mdash; she'll say whether they're ready for Nov or Feb.</div>
+        </div>
+      </div>
+
+      <div class="action-card piano" data-item-id="action-piano-hotso-workshop" data-source="piano" data-title="HOTSO Chamber Workshop registration">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="https://forms.gle/b3YoN5yjsJqM8yYa6" target="_blank" rel="noopener">
+          <span class="action-countdown urgent">Due in 9 days &middot; Thu Oct 1</span>
+          <div class="action-title">HOTSO Chamber Workshop &mdash; $35</div>
+          <div class="action-cta">Sat Oct 17, Dripping Springs. Register via form, Zelle HOTSO or pay Charlotte. Tell her so she can pick the piece.</div>
+        </a>
+      </div>
+
+      <div class="action-card pack" data-item-id="action-pack-fall-campout-reg" data-source="pack" data-title="Fall Campout registration">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <a class="action-link" href="http://www.austinpack162.com/node/7318" target="_blank" rel="noopener">
+          <span class="action-countdown urgent">Due in 9 days &middot; Thu Oct 1</span>
+          <div class="action-title">Fall Campout registration</div>
+          <div class="action-cta">Enchanted Rock, Oct 9&ndash;11. 74 people already in.</div>
+        </a>
+      </div>
+
+      <div class="action-card caraway" data-item-id="action-yearbook-cover-art" data-source="caraway" data-title="5th grade yearbook cover art">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="action-link">
+          <span class="action-countdown soft">Due Fri Oct 2</span>
+          <div class="action-title">Yearbook cover art contest</div>
+          <div class="action-cta">5th grade only &mdash; original artwork, voted onto the cover.</div>
+        </div>
+      </div>
+
+      <div class="action-card piano" data-item-id="action-piano-recital-availability" data-source="piano" data-title="Reply re: Halloween Recital timing">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="action-link">
+          <span class="action-countdown soft">Open &middot; no deadline</span>
+          <div class="action-title">Reply re: recital timing</div>
+          <div class="action-cta">Fri Oct 23 at Grand Living, Georgetown. Charlotte proposed 6:00 PM, asking for availability windows.</div>
         </div>
       </div>
 
@@ -435,92 +444,244 @@
   <!-- ========= SCHEDULE ========= -->
   <section class="schedule">
     <div class="section-label">What's on the calendar</div>
-    <span class="next-up">Next event &middot; today</span>
+    <span class="next-up">Next event &middot; tomorrow</span>
     <div class="day-grid" id="day-grid">
 
-      <div class="day-card next" data-day="2026-05-13">
+      <div class="day-card next" data-day="2026-09-23">
         <div class="day-head">
-          <div>
-            <div class="day-num">13</div>
-            <div class="day-month">May &middot; Next up</div>
-          </div>
+          <div><div class="day-num">23</div><div class="day-month">Sep &middot; Next up</div></div>
           <div class="day-name">Wed</div>
         </div>
-        <div class="event piano" data-item-id="event-2026-05-13-piano-group-class" data-source="piano" data-title="Piano group class">
+        <div class="event caraway" data-item-id="event-2026-09-23-homecoming-parade" data-source="caraway" data-title="Westwood Homecoming Parade">
           <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">4:30 &ndash; 6:00 PM</div>
-          <div class="event-title">Piano group class</div>
-          <div class="event-detail">Charlotte's studio</div>
+          <div class="event-time">6:00 PM <span class="event-flag">Action</span></div>
+          <div class="event-title">Westwood Homecoming Parade</div>
+          <div class="event-detail">Caraway float &middot; wear orange &amp; blue &middot; bring chairs and candy bags</div>
+        </div>
+        <div class="event pack" data-item-id="event-2026-09-23-pack-committee" data-source="pack" data-title="Pack Committee Meeting">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">8:00 PM <span class="event-flag optional">Optional</span></div>
+          <div class="event-title">Pack Committee Meeting</div>
+          <div class="event-detail">7312 Danwood Dr</div>
         </div>
       </div>
 
-      <div class="day-card" data-day="2026-05-14">
+      <div class="day-card" data-day="2026-09-25">
         <div class="day-head">
-          <div>
-            <div class="day-num">14</div>
-            <div class="day-month">May</div>
-          </div>
-          <div class="day-name">Thu</div>
-        </div>
-        <div class="event caraway" data-item-id="event-2026-05-14-texas-play" data-source="caraway" data-title="4th Grade Texas Play">
-          <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">7:45 AM <span class="event-flag">Action</span></div>
-          <div class="event-title">4th Grade Texas Play</div>
-          <div class="event-detail">Pre-print visitor badge to skip the desk</div>
-        </div>
-        <div class="event piano" data-item-id="event-2026-05-14-duo-crescenda" data-source="piano" data-title="Duo Crescenda performance">
-          <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">12:00 PM <span class="event-flag optional">Optional</span></div>
-          <div class="event-title">Duo Crescenda performance</div>
-          <div class="event-detail">Charlotte's duo &middot; Central Presbyterian, downtown Austin &middot; <a href="https://www.facebook.com/CPCThursdayConcerts" target="_blank" rel="noopener">livestream</a></div>
-        </div>
-      </div>
-
-      <div class="day-card" data-day="2026-05-15">
-        <div class="day-head">
-          <div>
-            <div class="day-num">15</div>
-            <div class="day-month">May</div>
-          </div>
+          <div><div class="day-num">25</div><div class="day-month">Sep</div></div>
           <div class="day-name">Fri</div>
         </div>
-        <div class="event pack" data-item-id="event-2026-05-15-pinewood-checkin" data-source="pack" data-title="Pinewood Derby check-in">
+        <div class="event caraway" data-item-id="event-2026-09-25-homecoming-game" data-source="caraway" data-title="WHS Homecoming Game">
           <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">3:00 PM</div>
-          <div class="event-title">Pinewood Derby check-in</div>
-          <div class="event-detail">Technical inspection before race day</div>
+          <div class="event-time">7:00 PM <span class="event-flag optional">Optional</span></div>
+          <div class="event-title">WHS Homecoming Game</div>
+          <div class="event-detail">KRAC</div>
         </div>
       </div>
 
-      <div class="day-card" data-day="2026-05-16">
+      <div class="day-card" data-day="2026-09-26">
         <div class="day-head">
-          <div>
-            <div class="day-num">16</div>
-            <div class="day-month">May</div>
-          </div>
+          <div><div class="day-num">26</div><div class="day-month">Sep</div></div>
           <div class="day-name">Sat</div>
         </div>
-        <div class="event pack" data-item-id="event-2026-05-16-pinewood-race" data-source="pack" data-title="Pinewood Derby Race Day">
+        <div class="event pack" data-item-id="event-2026-09-26-kite-rocket" data-source="pack" data-title="Cub Kite and Rocket Festival">
           <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">10:00 AM</div>
-          <div class="event-title">Pinewood Derby Race Day</div>
-          <div class="event-detail">Caraway Elementary cafeteria</div>
+          <div class="event-time">9:00 AM &ndash; 3:45 PM</div>
+          <div class="event-title">Cub Kite &amp; Rocket Festival</div>
+          <div class="event-detail">Smilin V Scout Ranch &middot; come and go &middot; Council sign-up</div>
         </div>
       </div>
 
-      <div class="day-card" data-day="2026-05-21">
+      <div class="day-card" data-day="2026-09-27">
         <div class="day-head">
-          <div>
-            <div class="day-num">21</div>
-            <div class="day-month">May</div>
-          </div>
+          <div><div class="day-num">27</div><div class="day-month">Sep</div></div>
+          <div class="day-name">Sun</div>
+        </div>
+        <div class="event pack" data-item-id="event-2026-09-27-den10-meeting" data-source="pack" data-title="Den 10 meeting">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">10:30 AM</div>
+          <div class="event-title">Den 10 meeting</div>
+          <div class="event-detail">Location TBD</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-09-28">
+        <div class="day-head">
+          <div><div class="day-num">28</div><div class="day-month">Sep</div></div>
+          <div class="day-name">Mon</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-09-28-owl-fundraiser-start" data-source="caraway" data-title="Owl Fundraiser begins">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">Runs to Oct 8</div>
+          <div class="event-title">PTA Owl Fundraiser begins</div>
+          <div class="event-detail">$50k goal &middot; in-house, no outside company &middot; class-level incentives</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-01">
+        <div class="day-head">
+          <div><div class="day-num">1</div><div class="day-month">Oct</div></div>
           <div class="day-name">Thu</div>
         </div>
-        <div class="event caraway" data-item-id="event-2026-05-21-last-day" data-source="caraway" data-title="Last Day Picnic Party">
+        <div class="event pack" data-item-id="event-2026-10-01-pack-meeting" data-source="pack" data-title="Pack Meeting">
           <button class="complete-btn" aria-label="Mark complete"></button>
-          <div class="event-time">10:45 AM &ndash; 12:00 PM <span class="event-flag">Action</span></div>
-          <div class="event-title">Last Day Picnic Party</div>
-          <div class="event-detail">Playground tables &middot; pre-print badge</div>
+          <div class="event-time">6:45 PM <span class="event-flag">2 deadlines</span></div>
+          <div class="event-title">Pack Meeting</div>
+          <div class="event-detail">Campout &amp; HOTSO registrations both close today</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-02">
+        <div class="day-head">
+          <div><div class="day-num">2</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Fri</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-10-02-yearbook-art-due" data-source="caraway" data-title="Yearbook cover art due">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">End of day <span class="event-flag">Action</span></div>
+          <div class="event-title">Yearbook cover art due</div>
+          <div class="event-detail">5th grade contest submissions</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-07">
+        <div class="day-head">
+          <div><div class="day-num">7</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Wed</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-10-07-walk-bike-day" data-source="caraway" data-title="Walk &amp; Bike to School Day">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">Morning</div>
+          <div class="event-title">Walk &amp; Bike to School Day</div>
+          <div class="event-detail">PTA Bike Rodeo the same day</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-08">
+        <div class="day-head">
+          <div><div class="day-num">8</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Thu</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-10-08-owl-run" data-source="caraway" data-title="PTA Owl Run">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">During Specials</div>
+          <div class="event-title">Owl Run &mdash; fundraiser finale</div>
+          <div class="event-detail">Caps the two-week Owl Fundraiser</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-09">
+        <div class="day-head">
+          <div><div class="day-num">9</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Fri</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-10-09-no-school-staff-dev" data-source="caraway" data-title="No school - Staff Development">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time"><span class="event-flag optional">No school</span></div>
+          <div class="event-title">Staff Development day</div>
+          <div class="event-detail">Students off &mdash; lines up with the campout departure</div>
+        </div>
+        <div class="event pack" data-item-id="event-2026-10-09-fall-campout" data-source="pack" data-title="Fall Campout at Enchanted Rock">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">Fri &ndash; Sun</div>
+          <div class="event-title">Fall Campout &mdash; Enchanted Rock</div>
+          <div class="event-detail">Through Oct 11</div>
+        </div>
+        <div class="event piano" data-item-id="event-2026-10-09-piano-practice" data-source="piano" data-title="Piano performance practice class">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">5:00 PM <span class="event-flag">Conflict</span></div>
+          <div class="event-title">Performance practice class</div>
+          <div class="event-detail">Collides with campout departure</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-10">
+        <div class="day-head">
+          <div><div class="day-num">10</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Sat</div>
+        </div>
+        <div class="event pack" data-item-id="event-2026-10-10-scout-night-afc" data-source="pack" data-title="Scout Night with Austin FC">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">7:30 PM <span class="event-flag">Conflict</span></div>
+          <div class="event-title">Scout Night &mdash; Austin FC</div>
+          <div class="event-detail">Q2 Stadium &middot; falls mid-campout</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-12">
+        <div class="day-head">
+          <div><div class="day-num">12</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Mon</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-10-12-no-school-conference" data-source="caraway" data-title="No school - Conference Day">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time"><span class="event-flag optional">No school</span></div>
+          <div class="event-title">Conference Day</div>
+          <div class="event-detail">Also Indigenous Peoples / Columbus Day district-wide</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-15">
+        <div class="day-head">
+          <div><div class="day-num">15</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Thu</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-10-15-picture-day" data-source="caraway" data-title="Fall Picture Day">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">School day</div>
+          <div class="event-title">Fall Picture Day</div>
+          <div class="event-detail">Dress accordingly</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-17">
+        <div class="day-head">
+          <div><div class="day-num">17</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Sat</div>
+        </div>
+        <div class="event piano" data-item-id="event-2026-10-17-hotso-workshop" data-source="piano" data-title="HOTSO Chamber Music Workshop">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">All day <span class="event-flag">Conflict</span></div>
+          <div class="event-title">HOTSO Chamber Workshop</div>
+          <div class="event-detail">Oak Branch Concerts, Dripping Springs</div>
+        </div>
+        <div class="event pack" data-item-id="event-2026-10-17-jota-joti" data-source="pack" data-title="Jamboree on the Air / Internet">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">8:00 AM <span class="event-flag">Conflict</span></div>
+          <div class="event-title">JOTA-JOTI</div>
+          <div class="event-detail">Fickett Center &middot; Council event</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-18">
+        <div class="day-head">
+          <div><div class="day-num">18</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Sun</div>
+        </div>
+        <div class="event caraway" data-item-id="event-2026-10-18-school-holiday" data-source="caraway" data-title="School holiday Oct 18-19">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">Sun &ndash; Mon <span class="event-flag optional">No school</span></div>
+          <div class="event-title">School Holiday</div>
+          <div class="event-detail">Oct 18&ndash;19 &middot; PTA Kalahari fundraiser weekend</div>
+        </div>
+        <div class="event piano" data-item-id="event-2026-10-18-symphony-concert" data-source="piano" data-title="Austin Symphony Halloween Children's Concert">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">&mdash; <span class="event-flag optional">Optional</span></div>
+          <div class="event-title">Halloween Children's Concert</div>
+          <div class="event-detail">Austin Symphony &middot; Charlotte's recommendation</div>
+        </div>
+      </div>
+
+      <div class="day-card" data-day="2026-10-23">
+        <div class="day-head">
+          <div><div class="day-num">23</div><div class="day-month">Oct</div></div>
+          <div class="day-name">Fri</div>
+        </div>
+        <div class="event piano" data-item-id="event-2026-10-23-halloween-recital" data-source="piano" data-title="Halloween Recital">
+          <button class="complete-btn" aria-label="Mark complete"></button>
+          <div class="event-time">6:00 PM (proposed)</div>
+          <div class="event-title">Halloween Recital</div>
+          <div class="event-detail">Grand Living, Georgetown &middot; costumes encouraged</div>
         </div>
       </div>
 
@@ -529,74 +690,99 @@
 
   <!-- ========= INFO / CONTEXT ========= -->
   <section class="info">
-    <div class="section-label">Class notes &amp; standing items</div>
+    <div class="section-label">Notes &amp; standing items</div>
     <div class="info-grid">
 
-      <div class="info-card magellan">
-        <h3>Magellan &mdash; Aria, Grade 2 (2C)</h3>
-        <div class="info-sub">Latest learning across homeroom &amp; specialists &mdash; updated May 4</div>
+      <div class="info-card caraway">
+        <h3>Caraway &mdash; 5th Grade, Mr. Baird</h3>
+        <div class="info-sub">Weekly Update &middot; Sep 18</div>
         <div class="topic">
-          <span class="topic-label">Math</span>
-          <div class="topic-body">Multiplying by 2, 3, 4, 5, 10 with skip counting and repeated addition.</div>
+          <span class="topic-label">Learning now</span>
+          <div class="topic-body">Language Arts: the Renaissance (informational texts) &middot; Science: physical properties of matter &middot; Social Studies: colonization &middot; Math: decimal multiplication &amp; division.</div>
         </div>
         <div class="topic">
-          <span class="topic-label">Spanish</span>
-          <div class="topic-body">Reading biographies; building toward creative narrative writing.</div>
+          <span class="topic-label">Devices</span>
+          <div class="topic-body">Several smartwatches spotted this week. TX House Bill 1481 bars phones, smartwatches and any data-capable device during the school day &mdash; powered off, in the backpack, back on at dismissal.</div>
         </div>
         <div class="topic">
-          <span class="topic-label">Specialists</span>
-          <div class="topic-body">Art: sketchbooks finished &amp; tied with ribbons &mdash; great job 2C! &middot; Music: rhythmic &amp; melodic literacy phase, translating staff notation to instruments &mdash; first ensemble piece coming &middot; PE: Newcomb (volleyball lead-up game, throwing/catching over the net) &middot; Library: final checkout this week; all books due throughout May.</div>
+          <span class="topic-label">Safety Patrol</span>
+          <div class="topic-body">Open to 5th graders who want it. Optional sign-up form, no stated deadline.</div>
         </div>
         <div class="topic">
-          <span class="topic-label">Photos</span>
-          <div class="topic-body"><a href="https://magellanschool.filecamp.com/s/o/GBEygSt1aOM1gc9Z" target="_blank" rel="noopener">Project share-out gallery</a></div>
-        </div>
-        <div class="topic">
-          <span class="topic-label">Camp Everything</span>
-          <div class="topic-body">Barnisons Catering available for camp lunches &mdash; <a href="https://drive.google.com/file/d/1nBidgwNuhyOwVZhGohhT0m_7tQRhNcs1/view?usp=sharing" target="_blank" rel="noopener">account setup info</a> &middot; <a href="https://drive.google.com/file/d/1q-B2V2am29zv4lSiAFeByFogdX/view?usp=sharing" target="_blank" rel="noopener">weekly menu</a></div>
+          <span class="topic-label">Contact</span>
+          <div class="topic-body">patrick_baird@roundrockisd.org &middot; 512-464-5569</div>
         </div>
       </div>
 
       <div class="info-card caraway">
-        <h3>Caraway &mdash; Grade 4, Ms. Lozano</h3>
-        <div class="info-sub">Recap &amp; references</div>
+        <h3>Caraway &mdash; school-wide</h3>
+        <div class="info-sub">Principal's Newsletter &middot; Sep 20</div>
         <div class="topic">
-          <span class="topic-label">Newsletter</span>
-          <div class="topic-body">End-of-year newsletter sent May 11 &mdash; <a href="https://canva.link/w5irm0yv6r8hkz6" target="_blank" rel="noopener">view online</a>. Scroll back to see how much they've grown this year.</div>
+          <span class="topic-label">Owl Fundraiser</span>
+          <div class="topic-body">Sep 28 &ndash; Oct 8, $50k goal. Run in-house so the money stays at Caraway. Incentives are class and grade-level, not per-child.</div>
         </div>
         <div class="topic">
-          <span class="topic-label">Apr 28 recap</span>
-          <div class="topic-body">Bob Bullock Museum field trip &mdash; class returned by ~1:45 PM.</div>
+          <span class="topic-label">5th grade send-off</span>
+          <div class="topic-body">Pride Lines shout-out ads, the "When I Grow Up" photo feature, and the cover art contest are all open now &mdash; this is Eli's last Caraway year.</div>
         </div>
         <div class="topic">
-          <span class="topic-label">Earlier April</span>
-          <div class="topic-body">Field Day &mdash; Gorilla Steve pinata, watch backpacks for stowaway wet clothes.</div>
+          <span class="topic-label">Yearbook</span>
+          <div class="topic-body">On sale from $26 at jostensyearbooks.com. Price goes up in November.</div>
         </div>
-      </div>
-
-      <div class="info-card magellan">
-        <h3>Standing ask</h3>
-        <div class="info-sub">No deadline</div>
         <div class="topic">
-          <span class="topic-label">Magellan Art</span>
-          <div class="topic-body">Save magazines for next year &mdash; Ms. Brenda is collecting them as a color medium.</div>
+          <span class="topic-label">Volunteering</span>
+          <div class="topic-body">Cafeteria help and Caraway Academy (enrichment, starts early October) both looking for parents.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Car line</span>
+          <div class="topic-body">No passing, no left turn onto Oak View, and kids must be able to unbuckle and exit on their own.</div>
         </div>
       </div>
 
       <div class="info-card piano">
         <h3>Piano &mdash; Charlotte Howenstein</h3>
-        <div class="info-sub">Studio rhythm &amp; key dates</div>
+        <div class="info-sub">Sep 18 and Sep 21</div>
         <div class="topic">
-          <span class="topic-label">Lessons</span>
-          <div class="topic-body">Regular slot: Wed 5&ndash;6 PM. Group class also runs on Wednesdays 4:30&ndash;6:00 PM.</div>
+          <span class="topic-label">Halloween Recital</span>
+          <div class="topic-body">Fri Oct 23 at Grand Living, Georgetown. 6:00 PM proposed, flexible later. No Saturday slot was available.</div>
         </div>
         <div class="topic">
-          <span class="topic-label">Charlotte away</span>
-          <div class="topic-body">May 25 &ndash; Jun 1, and Jul 13 &ndash; 20. Work around these for any summer lessons.</div>
+          <span class="topic-label">Chamber workshop</span>
+          <div class="topic-body">Sat Oct 17, Dripping Springs. Play alongside a professional violinist and cellist. Open to all levels, even one-hand melodies.</div>
         </div>
         <div class="topic">
-          <span class="topic-label">Summer enrichment</span>
-          <div class="topic-body"><a href="https://suzukiassociation.org/resources/events/institutes/" target="_blank" rel="noopener">Suzuki Summer Institutes</a> directory, if interested.</div>
+          <span class="topic-label">Theory test</span>
+          <div class="topic-body">Nov 7 sitting, registration closes Sep 30. February is the alternate.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Studio</span>
+          <div class="topic-body"><a href="https://www.charlottespiano.com" target="_blank" rel="noopener">charlottespiano.com</a></div>
+        </div>
+      </div>
+
+      <div class="info-card pack">
+        <h3>Pack 162</h3>
+        <div class="info-sub">Weekly EBlast &middot; Sep 22</div>
+        <div class="topic">
+          <span class="topic-label">Fall Campout</span>
+          <div class="topic-body">Enchanted Rock State Natural Area, Oct 9&ndash;11. 74 attending so far. Registration closes Oct 1.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Council events</span>
+          <div class="topic-body">Kite &amp; Rocket Festival (Sep 26), Austin FC Scout Night (Oct 10), JOTA-JOTI (Oct 17). Sign up through Council, not the Pack.</div>
+        </div>
+        <div class="topic">
+          <span class="topic-label">Dens</span>
+          <div class="topic-body">Den 10 and Den 3 on this list. Den 10 meets Sun Sep 27.</div>
+        </div>
+      </div>
+
+      <div class="info-card magellan">
+        <h3>Magellan &mdash; still no signal</h3>
+        <div class="info-sub">Worth a check</div>
+        <div class="topic">
+          <span class="topic-label">Status</span>
+          <div class="topic-body">Zero Magellan or Toddle emails in 30+ days, while Caraway, Pack and piano all came through. Either Aria's school changed, the forwarding for her school stopped, or Magellan mail lands somewhere else.</div>
         </div>
       </div>
 
