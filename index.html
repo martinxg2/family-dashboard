@@ -22,6 +22,8 @@
     --pack-soft: #d9ecde;
     --piano: #7c3aed;
     --piano-soft: #ede4ff;
+    --home: #0e7490;
+    --home-soft: #d3eef7;
 
     /* Action / today */
     --alert: #b91c1c;
@@ -62,6 +64,7 @@
   .swatch-caraway  { background: var(--caraway); }
   .swatch-pack     { background: var(--pack); }
   .swatch-piano    { background: var(--piano); }
+  .swatch-home     { background: var(--home); }
 
   .section-label {
     display: flex; align-items: center; gap: 10px;
@@ -124,6 +127,7 @@
   .action-card.pack     { border-left-color: var(--pack); }
   .action-card.magellan { border-left-color: var(--magellan); }
   .action-card.piano    { border-left-color: var(--piano); }
+  .action-card.home     { border-left-color: var(--home); }
   .action-card:hover { transform: translateY(-2px); }
   .action-link {
     display: block;
@@ -148,6 +152,31 @@
   }
   .action-cta a { color: var(--magellan); text-decoration: none; font-weight: 600; }
   .action-cta a:hover { text-decoration: underline; }
+
+  /* ============ Todo list ============ */
+  .todos { margin-bottom: 36px; }
+  .todo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 900px) { .todo-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .todo-grid { grid-template-columns: 1fr; } }
+  .todo {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--home);
+    border-radius: 8px;
+    padding: 11px 36px 11px 13px;
+  }
+  .todo.caraway  { border-left-color: var(--caraway); }
+  .todo.magellan { border-left-color: var(--magellan); }
+  .todo.pack     { border-left-color: var(--pack); }
+  .todo.piano    { border-left-color: var(--piano); }
+  .todo-title { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .todo-note  { font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+  .todo .complete-btn { top: 9px; right: 9px; width: 20px; height: 20px; font-size: 12px; }
 
   /* ============ Calendar ============ */
   .schedule { margin-bottom: 36px; }
@@ -211,6 +240,7 @@
   .event.caraway  { border-left-color: var(--caraway);  background: var(--caraway-soft); }
   .event.pack     { border-left-color: var(--pack);     background: var(--pack-soft); }
   .event.piano    { border-left-color: var(--piano);    background: var(--piano-soft); }
+  .event.home     { border-left-color: var(--home);     background: var(--home-soft); }
   .event .complete-btn { top: 8px; right: 8px; width: 20px; height: 20px; font-size: 12px; }
   .event-time {
     font-size: 11px; font-weight: 700;
@@ -257,6 +287,7 @@
   .info-card.caraway  { border-top-color: var(--caraway); }
   .info-card.pack     { border-top-color: var(--pack); }
   .info-card.piano    { border-top-color: var(--piano); }
+  .info-card.home     { border-top-color: var(--home); }
   .info-card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 700; }
   .info-card .info-sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
   .topic { margin-bottom: 10px; }
@@ -271,6 +302,7 @@
   .caraway  .topic-label { background: var(--caraway-soft);  color: var(--caraway); }
   .pack     .topic-label { background: var(--pack-soft);     color: var(--pack); }
   .piano    .topic-label { background: var(--piano-soft);    color: var(--piano); }
+  .home     .topic-label { background: var(--home-soft);     color: var(--home); }
   .topic-body { font-size: 13px; color: var(--ink-soft); }
   .topic-body a { color: var(--magellan); }
 
@@ -305,6 +337,7 @@
   .completed-item.caraway  { border-left-color: var(--caraway); }
   .completed-item.pack     { border-left-color: var(--pack); }
   .completed-item.piano    { border-left-color: var(--piano); }
+  .completed-item.home     { border-left-color: var(--home); }
   .completed-item .check {
     color: var(--pack);
     font-weight: 700;
@@ -357,6 +390,7 @@
       <span class="legend-item"><span class="legend-swatch swatch-caraway"></span>Caraway</span>
       <span class="legend-item"><span class="legend-swatch swatch-pack"></span>Pack 162</span>
       <span class="legend-item"><span class="legend-swatch swatch-piano"></span>Piano</span>
+      <span class="legend-item"><span class="legend-swatch swatch-home"></span>Home</span>
     </div>
   </header>
 
@@ -371,6 +405,15 @@
           <span class="action-countdown urgent">Tomorrow &middot; Wed Sep 30</span>
           <div class="action-title">Caraway Academy opt-in &mdash; Eli</div>
           <div class="action-cta">SB 12 consent. No form, no Academy &mdash; and they start Friday Oct 2.</div>
+        </div>
+      </div>
+
+      <div class="action-card piano" data-item-id="action-aria-practice-theory" data-source="piano" data-title="Give Aria a practice theory test">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="action-link">
+          <span class="action-countdown urgent">Tonight &mdash; gates tomorrow</span>
+          <div class="action-title">Practice theory test with Aria</div>
+          <div class="action-cta">This is the input for the fall-vs-February call below. Do it before Wednesday or the decision gets made blind.</div>
         </div>
       </div>
 
@@ -439,6 +482,58 @@
 
     </div>
     <div id="actions-empty" class="completed-empty" style="display:none;">All action items completed &mdash; nothing pending right now.</div>
+  </section>
+
+  <!-- ========= TODO LIST ========= -->
+  <section class="todos">
+    <div class="section-label">From your shared list</div>
+    <div class="todo-grid">
+
+      <div class="todo caraway" data-item-id="todo-owl-run-attend" data-source="caraway" data-title="Decide who goes to the Owl Run">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">Decide who covers the Owl Run</div>
+        <div class="todo-note">Oct 8, during Specials &mdash; one of you is going</div>
+      </div>
+
+      <div class="todo caraway" data-item-id="todo-eli-yearbook-order" data-source="caraway" data-title="Order Eli's yearbook">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">Order Eli's yearbook</div>
+        <div class="todo-note">From $26 &mdash; price rises in November</div>
+      </div>
+
+      <div class="todo caraway" data-item-id="todo-pride-lines" data-source="caraway" data-title="Pride Line and When I Grow Up submissions">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">Pride Line + "When I Grow Up"</div>
+        <div class="todo-note">5th grade send-off features, Eli's last year</div>
+      </div>
+
+      <div class="todo home" data-item-id="todo-pediatrician" data-source="home" data-title="Schedule pediatrician">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">Schedule pediatrician</div>
+      </div>
+
+      <div class="todo home" data-item-id="todo-trusted-traveler" data-source="home" data-title="Trusted Traveler renewal">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">Trusted Traveler renewal</div>
+      </div>
+
+      <div class="todo home" data-item-id="todo-piano-tuner" data-source="home" data-title="Book piano tuner">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">Book the piano tuner</div>
+        <div class="todo-note">Worth doing before the Oct 4 recital if it's at home</div>
+      </div>
+
+      <div class="todo home" data-item-id="todo-aria-duolingo" data-source="home" data-title="Aria Duolingo setup">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">Aria Duolingo setup</div>
+      </div>
+
+      <div class="todo home" data-item-id="todo-cbarq-river" data-source="home" data-title="CBarq survey for River">
+        <button class="complete-btn" aria-label="Mark complete"></button>
+        <div class="todo-title">C-BARQ survey for River</div>
+      </div>
+
+    </div>
   </section>
 
   <!-- ========= SCHEDULE ========= -->
@@ -564,8 +659,8 @@
         <div class="event caraway" data-item-id="event-2026-10-08-owl-run" data-source="caraway" data-title="Owl Fun Run + Band Together day">
           <button class="complete-btn" aria-label="Mark complete"></button>
           <div class="event-time">During Specials</div>
-          <div class="event-title">Owl Fun Run</div>
-          <div class="event-detail">Bandana or sweatband plus KCE gear. Fundraiser finale.</div>
+          <div class="event-title">Owl Fun Run <span class="event-flag">Parent</span></div>
+          <div class="event-detail">Bandana plus KCE gear. One of you plans to attend &mdash; it runs during Specials, so it's a work-hours trip.</div>
         </div>
       </div>
 
